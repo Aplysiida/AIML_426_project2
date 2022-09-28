@@ -1,18 +1,17 @@
-from os import DirEntry
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import seaborn as sns
 
 import sys
-
-rng = np.random.default_rng(seed=50)
 
 """
 Parse files into tuple (num of items, bag capacity, dataframe)
 """
 def parse_data(filepath):
     df = pd.read_table(filepath, sep=' ')
-    M = df.columns[0]
-    Q = df.columns[1]
+    M = int(df.columns[0])
+    Q = int(df.columns[1])
     df.columns.values[0], df.columns.values[1] = 'value','weight'
     return (M,Q,df)  
 
@@ -21,7 +20,7 @@ Generate one individual for pop
     p = probability vector
     feature_num = length of individual
 """
-def gen_individual(p, feature_num):
+def gen_individual(p, feature_num, rng):
     return np.array([1 if (rng.random() < p[k]) else 0 for k in range(feature_num)])
 
 """
@@ -35,19 +34,27 @@ def update_prob(p, learning_rate, individuals):
         p = p + learning_rate * (ind - p)
     return p
 
-def mutate_prob(p, mut_rate, mut_shift):
+"""
+Probability mutation operator for PBIL
+    p = probability vector
+    mut_rate = probability of mutation occuring (0,1)
+    mut_shift = amount of mutation to affect the prob vector (0,1)
+"""
+def mutate_prob(p, mut_rate, mut_shift, rng):
     return np.array([
         p_i * (1.0-mut_shift) + rng.random() * mut_shift if(rng.random() < mut_rate) else p_i
         for p_i in p
         ])
 
 """
+The PBIL algorithm 
+Returns several values: best solution, best solution's fitness, average of best individuals, number of iterations done
     fitness_func = function to use to measure individual's fitness
     feature_num = length of individual
     pop_size = number of individuals in one population
     max_iter = stopping criteria
     mut_rate = probability of mutation occuring (0,1)
-    mut_shift = amount of mutation to affect the prob vector
+    mut_shift = amount of mutation to affect the prob vector (0,1)
     num_best = number of best individuals
     num_worst =  number of worst individuals
     max_p = maximum value allowed in prob vector
@@ -56,34 +63,57 @@ def mutate_prob(p, mut_rate, mut_shift):
 """
 
 def PBIL(
-    fitness_func, feature_num = 5, pop_size = 5, max_iter = 100, 
-    mut_rate = 0.1, mut_shift = 0.1, num_best = 5, num_worst = 5, max_p = 0.9, min_p = 0.1, learning_rate=1.0):
+    fitness_func, feature_num, rng, pop_size = 100, max_iter = 1000,
+    mut_rate = 0.02, mut_shift = 0.05, num_best = 5, num_worst = 5, max_p = 0.9, min_p = 0.1, learning_rate=0.1):
     p = np.linspace(start=0.5, stop=0.5, num=feature_num) #initialise prob vector
 
-    print(p)
+    best_individual = gen_individual(p, feature_num, rng) #initial random guess
+    best_avg = [] #average fitness of num_best individuals for each generation
 
-    #for i in range(max_iter):  #while not reached stopping criteria
-    pop = [gen_individual(p, feature_num) for _ in range(pop_size)] #use p vector to gen pop
-    pop.sort(key=fitness_func, reverse=True)  #sort individuals by fitness
+    for i in range(max_iter):  #while not reached stopping criteria
+        pop = [gen_individual(p, feature_num, rng) for _ in range(pop_size)] #use p vector to gen pop
+        pop.sort(key=fitness_func, reverse=True)  #sort individuals by fitness
 
-    [print(i) for i in pop]
+        best_individuals = pop[:num_best]
+        worst_individuals = pop[pop_size - num_worst:]
 
-    best_individuals = pop[:num_best]
-    worst_individuals = pop[pop_size - num_worst:]
-    #check if update function is correct
-    p = update_prob(p, learning_rate, best_individuals)   #for best individuals
-    p = update_prob(p, (-1.0 * learning_rate), worst_individuals)   #for worst individuals
+        #check if update function is correct
+        p = update_prob(p, learning_rate, best_individuals)   #for best individuals
+        p = update_prob(p, (-1.0 * learning_rate), worst_individuals)   #for worst individuals
 
-    p = mutate_prob(p, mut_rate=mut_rate, mut_shift=mut_shift)   #mutate p
-    p = np.array([np.maximum(np.minimum(p_i, max_p),min_p) for p_i in p])   #clamp p
+        #p = mutate_prob(p, mut_rate=mut_rate, mut_shift=mut_shift, rng=rng)   #mutate p
+        p = np.array([np.maximum(np.minimum(p_i, max_p),min_p) for p_i in p])   #clamp p
+
+        best_avg.append(np.average([fitness_func(best) for best in best_individuals]))
+        best_individual = pop[0]
     
-    #return best individual
+    return best_individual, fit_func(best_individual), best_avg, max_iter
 
 if __name__ == "__main__":
     filepaths = sys.argv[1:]
     #store dataset as (num of items, bag capacity, data)
     datasets = [parse_data(filepath=filepath) for filepath in filepaths] #parse files
+    dataset_names = ['10_269','23_10000','100_995']
 
     fit_func = lambda ind : np.sum(ind)
+    seeds = np.random.default_rng(seed=50).integers(low=0, high=2000, size=5)
 
-    PBIL(fitness_func=fit_func)
+    for i, (item_num, capacity, dataset) in enumerate(datasets):
+        fig, axis = plt.subplots(1, len(seeds))
+        fig.set_figwidth(20)
+        fig.suptitle(dataset_names[i]+' Convergence Curve')
+
+        best_fitnesses = []
+
+        print('at dataset',dataset_names[i])
+        for j, seed in enumerate(seeds):
+            print('\tfor seed',seed)
+            best_ind, best_fitness, best_avg, num_iter = PBIL(fitness_func=fit_func, feature_num=item_num, rng=np.random.default_rng(seed=seed))
+            #print('best individual = ', best_ind,' fitness = ',best_fitness)
+            best_fitnesses.append(best_fitness)
+            sns.lineplot(x=range(num_iter),y=best_avg, ax=axis[j])
+            axis[j].set_title('Seed = '+str(seed))
+            axis[j].set(xlabel='hi', ylabel='hello')
+
+        print('Mean = ', np.average(best_fitnesses), ' Standard Deviation = ', np.std(best_fitnesses))
+        fig.savefig('knapsack_'+dataset_names[i]+'.png')
