@@ -50,6 +50,7 @@ def mutate_prob(p, mut_rate, mut_shift, rng):
 The PBIL algorithm 
 Returns several values: best solution, best solution's fitness, average of best individuals, number of iterations done
     fitness_func = function to use to measure individual's fitness
+    value_func = not used for PBIL fitness, used for graphs and output
     feature_num = length of individual
     pop_size = number of individuals in one population
     max_iter = stopping criteria
@@ -63,7 +64,7 @@ Returns several values: best solution, best solution's fitness, average of best 
 """
 
 def PBIL(
-    fitness_func, feature_num, rng, pop_size = 100, max_iter = 1000,
+    fitness_func, value_func, feature_num, rng, pop_size = 10, max_iter = 100,
     mut_rate = 0.02, mut_shift = 0.05, num_best = 5, num_worst = 5, max_p = 0.9, min_p = 0.1, learning_rate=0.1):
     p = np.linspace(start=0.5, stop=0.5, num=feature_num) #initialise prob vector
 
@@ -84,10 +85,27 @@ def PBIL(
         #p = mutate_prob(p, mut_rate=mut_rate, mut_shift=mut_shift, rng=rng)   #mutate p
         p = np.array([np.maximum(np.minimum(p_i, max_p),min_p) for p_i in p])   #clamp p
 
-        best_avg.append(np.average([fitness_func(best) for best in best_individuals]))
+        best_avg.append(np.average([value_func(best) for best in best_individuals]))
         best_individual = pop[0]
     
-    return best_individual, fit_func(best_individual), best_avg, max_iter
+    return best_individual, value_func(best_individual), best_avg, max_iter
+
+"""
+Fitness for knapsack problem which focus on finding highest value with weight constraint satisfied
+"""
+def fitness_function(individual, dataset, penalty_coeff, max_weight):
+    if(not individual.__contains__(1)): return 0.0    #to avoid empty knapsack situation
+    values, weights = zip(*[ dataset.iloc[i] for i, pickup in enumerate(individual) if (pickup == 1)])
+    return np.sum(values) - penalty_coeff*np.max([0.0, np.sum(weights) - capacity])
+
+"""
+Evaluates total sum of values in individual while ignoring weight constraint
+Not used for PBIL fitness, used for graphs and output
+"""
+def value_fitness(individual, dataset):
+    if(not individual.__contains__(1)): return 0.0    #to avoid empty knapsack situation
+    values = [ dataset.iloc[i,0] for i, pickup in enumerate(individual) if (pickup == 1)]
+    return np.sum(values)
 
 if __name__ == "__main__":
     filepaths = sys.argv[1:]
@@ -98,22 +116,30 @@ if __name__ == "__main__":
     fit_func = lambda ind : np.sum(ind)
     seeds = np.random.default_rng(seed=50).integers(low=0, high=2000, size=5)
 
+    alpha = 1.0 #penalty coefficient
+
     for i, (item_num, capacity, dataset) in enumerate(datasets):
         fig, axis = plt.subplots(1, len(seeds))
         fig.set_figwidth(20)
         fig.suptitle(dataset_names[i]+' Convergence Curve')
 
-        best_fitnesses = []
+        best_fitnesses = [] #store all best fitnesses from all the seeds
 
         print('at dataset',dataset_names[i])
         for j, seed in enumerate(seeds):
             print('\tfor seed',seed)
-            best_ind, best_fitness, best_avg, num_iter = PBIL(fitness_func=fit_func, feature_num=item_num, rng=np.random.default_rng(seed=seed))
-            #print('best individual = ', best_ind,' fitness = ',best_fitness)
+            best_ind, best_fitness, best_avg, num_iter = PBIL(
+                fitness_func=lambda x : fitness_function(individual=x, dataset=dataset, penalty_coeff=alpha, max_weight=capacity), 
+                value_func=lambda x : value_fitness(individual=x, dataset=dataset),
+                feature_num=item_num, 
+                rng=np.random.default_rng(seed=seed)
+                )
+            print('best individual = ', best_ind,' fitness = ',best_fitness)
             best_fitnesses.append(best_fitness)
+            #create convergence curve graph for PBIL output
             sns.lineplot(x=range(num_iter),y=best_avg, ax=axis[j])
             axis[j].set_title('Seed = '+str(seed))
-            axis[j].set(xlabel='hi', ylabel='hello')
+            axis[j].set(xlabel='Number of Generation', ylabel='Average Fitness of Best')
 
         print('Mean = ', np.average(best_fitnesses), ' Standard Deviation = ', np.std(best_fitnesses))
         fig.savefig('knapsack_'+dataset_names[i]+'.png')
