@@ -1,0 +1,67 @@
+Question 1:
+Choice of EP and DE/ES:
+EP choices:
+basic-EP
+meta-EP
+fast-EP
+IEP
+
+Goal is to find minimum values of two continuous functions. Solution will be set X where x_i is a parameter for the function, range of x is [-30,30]. Will solve problem for D=20 so len(X) = 20.
+Ep to choose:
+
+ES:
+(1+1)-ES
+(chi+1)-ES
+(chi+lambda)-ES
+(chi, lambda)-ES)
+Self-adaptive ES
+CMA-ES
+CMSA-ES
+Natural ES
+
+DE:
+(not yet learnt)
+
+Question 2:
+Individual representation:
+EDAs originally used to solve combinatorial/binary optimization problems. So the representation of the solution is recommended to be a binary vector. Thus for the knapsack problem to be a binary optimization problem, use a bit vector to represent a solution. Length of the bit vector is equal to total number of possible items to select where for each bit 1 means select the item while 0 means ignore the item.
+
+Fitness Function:
+The goal for the problem is to optimizatize the combination of selected items to have the maximum total value while satisfying the weight constraint. The fitness function is used for selection and weighted computation in the UMDA algorithm and for sorting the generated individuals in the population in the PBIL algorithm. The fitness function is defined to be $insert function here$ with the alpha implemented to heavily discourage constraint violating solutions.
+
+EDA algorithm:
+UMDA with a too high alpha value will converge before reaching the best solution while UMDA with a too low alpha value will take a very large number of generations before reaching the optimal solution. For the PBIL algorithm, more control can be added through being able to select the best and worst solutions to affect the probability vector. So the PBIL algorithm is used for this problem.
+
+EDA design/ Outline of PBIL algorithm:
+Talk about if chose to use mutation function for probability
+What stopping criteria is used
+How a new knapsack solution is generated
+How probability vector evolves
+
+EDA parameters:
+Parameters to talk about:
+pop size
+learning rate
+mutation rate
+mutation shift
+Number of best individuals
+Number of worst individuals
+
+Discussion:
+Result from each dataset:
+	Mean and standard deviation
+	How is average of best individuals calculated
+	Does it reach optimal value
+	How long does it take to reach best solution
+	Chart: convergence curve
+	Shape of convergence curve
+
+Conclusion:
+	Does PBIL work well for this problem?
+	If so why did it work well
+	If not why didn't it work well
+		Ways to improve
+	What makes PBIL unique for this problem compared to other algorithms
+
+Question 3:
+
