@@ -1,0 +1,24 @@
+\documentclass{article}
+
+\title{AIML426 Project 2 Report}
+\date{}
+
+\begin{document}
+	\maketitle
+	
+\section*{Part 1: Evolutionary Programming and Differential Evolution Algorithms}
+\section*{Part 2: Estimation of Distribution Algorithm}
+\subsection*{EDA Design}
+\subsubsection*{Individual Representation}
+EDAs are used to solve combinatorial/binary optimization problems; for the knapsack problem to be compatible with the EDA algorithm the representation of the solution should be a binary vector. The entire bit vector represents all the items which can be picked up, where for each bit 1 represents the item is currently being selected and 0 represents the item being ignored. Which item is selected is determined by the position of the bit in the vector. This representation can represent any possible combination of selected items and thus is a good choice for this problem. \par
+\subsubsection*{Fitness Function}
+The goal for the problem is to find a combination of items that have the highest total value while also satisfying the weight constraint. For optimizing the fitness to the maximum total value, the sum of values in the item combination is calculated. To handle the weight constraint in the problem a penalty coefficient called $\alpha$ is implemented into the fitness to heavily discourage combinations that violate the weight constraint by lowering the fitness. \par 
+\noindent The formula implemented is 
+\begin{center}
+$max(0, \sum_{i=1}^{M}v_i - \alpha *max(0,\sum_{i=1}^{M}w_i)-max weight)$. 
+\end{center}
+Where $M=$ the number of chosen items in the solution, $v=$ value and $w=$ weight.
+
+\subsection*{Results and Discussion}
+\subsection*{Conclusion}
+\end{document}
