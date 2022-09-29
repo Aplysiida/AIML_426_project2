@@ -18,7 +18,15 @@ The goal for the problem is to find a combination of items that have the highest
 $max(0, \sum_{i=1}^{M}v_i - \alpha *max(0,\sum_{i=1}^{M}w_i)-max weight)$. 
 \end{center}
 Where $M=$ the number of chosen items in the solution, $v=$ value and $w=$ weight.
-
+\subsubsection*{EDA Algorithm}
+There are two algorithms to select from for this problem: UMDA and PBIL. UMBA calculates the probability vector as the mean vector of the current generation’s population’s individuals while PBIL's probability is influenced only by the best and worst individuals in the population. PBIL focuses more on exploitation compared to UMDA since PBIL ignores individuals in the population that UMDA considers. But exploration can be implemented into PBIL using the mutation operator, something that UMDA does not have. This balance between exploitation and exploration means that PBIL was chosen for this problem. \par
+\subsubsection*{PBIL Design}
+\subsubsection*{EDA Parameters}
+\cite{baluja1994population}
 \subsection*{Results and Discussion}
 \subsection*{Conclusion}
+
+\bibliographystyle{acm}
+\bibliography{references}
+
 \end{document}
