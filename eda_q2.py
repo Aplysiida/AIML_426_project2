@@ -134,27 +134,43 @@ if __name__ == "__main__":
     fit_func = lambda ind : np.sum(ind)
     seeds = np.random.default_rng(seed=50).integers(low=0, high=2000, size=5)
 
-    datasets = datasets[:2]
-    dataset_parameters = dataset_parameters[:2]
-    dataset_names = dataset_names[:2]
+    datasets = datasets[:1]
+    #dataset_parameters = dataset_parameters[2:3]
+    dataset_names = dataset_names[:1]
 
     f = open('output.txt', 'w')
 
-    for i, (item_num, capacity, dataset) in enumerate(datasets):
-        current_parameters = dataset_parameters[i]
+    dataset_parameters = [
+        (10.0, 200, 0.02, 0.99, 0.01, 2, 2),
+        (10.0, 200, 0.02, 0.99, 0.01, 5, 5),
+        (10.0, 200, 0.02, 0.99, 0.01, 8, 8),
+        (10.0, 200, 0.02, 0.95, 0.05, 2, 2),
+        (10.0, 200, 0.02, 0.95, 0.05, 5, 5),
+        (10.0, 200, 0.02, 0.95, 0.05, 8, 8),
+        (10.0, 200, 0.02, 0.90, 0.1, 2, 2),
+        (10.0, 200, 0.02, 0.90, 0.1, 5, 5),
+        (10.0, 200, 0.02, 0.90, 0.1, 8, 8)
+    ]
 
-        fig, axis = plt.subplots(1, len(seeds))
-        fig.set_figwidth(20)
-        fig.suptitle(dataset_names[i]+' Convergence Curve')
+    for k in dataset_parameters:
+        print('at parameters'+str(k))
+        f.write('\n\nat parameters '+str(k)+'\n\n')
+        current_parameters = k
+        for i, (item_num, capacity, dataset) in enumerate(datasets):
+        #current_parameters = dataset_parameters[i]
 
-        best_fitnesses = [] #store all best fitnesses from all the seeds
+        #fig, axis = plt.subplots(1, len(seeds))
+        #fig.set_figwidth(20)
+        #fig.suptitle(dataset_names[i]+' Convergence Curve')
 
-        print('at dataset',dataset_names[i])
-        f.write('at dataset'+dataset_names[i]+'\n')
-        for j, seed in enumerate(seeds):
-            print('seed = ',seed)
-            f.write('\tfor seed'+str(seed)+'\n')
-            best_ind, best_fitness, best_avg, num_iter = PBIL(
+            best_fitnesses = [] #store all best fitnesses from all the seeds
+
+            print('at dataset',dataset_names[i])
+            f.write('at dataset'+dataset_names[i]+'\n')
+            for j, seed in enumerate(seeds):
+                print('seed = ',seed)
+                f.write('\tfor seed'+str(seed)+'\n')
+                best_ind, best_fitness, best_avg, num_iter = PBIL(
                 fitness_func=lambda x : fitness_function(individual=x, dataset=dataset, penalty_coeff=current_parameters[0], max_weight=capacity), 
                 value_func=lambda x : value_fitness(individual=x, dataset=dataset),
                 feature_num=item_num, 
@@ -166,12 +182,12 @@ if __name__ == "__main__":
                 num_best=current_parameters[5],
                 num_worst=current_parameters[6]
                 )
-            f.write('best individual = '+str(best_ind)+' fitness = '+str(best_fitness)+'\n')
-            best_fitnesses.append(best_fitness)
-            #create convergence curve graph for PBIL output
-            sns.lineplot(x=range(num_iter),y=best_avg, ax=axis[j])
-            axis[j].set_title('Seed = '+str(seed))
-            axis[j].set(xlabel='Number of Generation', ylabel='Average Fitness of Best')
+                f.write('best individual = '+str(best_ind)+' fitness = '+str(best_fitness)+'\n')
+                best_fitnesses.append(best_fitness)
+                #create convergence curve graph for PBIL output
+            #sns.lineplot(x=range(num_iter),y=best_avg, ax=axis[j])
+            #axis[j].set_title('Seed = '+str(seed))
+            #axis[j].set(xlabel='Number of Generation', ylabel='Average Fitness of Best')
 
-        f.write('Mean = '+str(np.average(best_fitnesses))+ ' Standard Deviation = '+str(np.std(best_fitnesses))+'\n')
-        fig.savefig('knapsack_'+dataset_names[i]+'.png')
+            f.write('Mean = '+str(np.average(best_fitnesses))+ ' Standard Deviation = '+str(np.std(best_fitnesses))+'\n')
+        #fig.savefig('knapsack_'+dataset_names[i]+'.png')

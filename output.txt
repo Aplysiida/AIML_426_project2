@@ -1,3 +1,5 @@
+at parameters (10.0, 200, 0.02, 0.99, 0.01, 2, 2)
+
 at dataset10_269
 	for seed1562
 best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
@@ -10,15 +12,115 @@ best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
 	for seed1647
 best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
 Mean = 295.0 Standard Deviation = 0.0
-at dataset23_10000
+at parameters (10.0, 200, 0.02, 0.99, 0.01, 5, 5)
+
+at dataset10_269
 	for seed1562
-best individual = [1 1 1 1 1 1 0 1 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0] fitness = 9765
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
 	for seed1574
-best individual = [1 1 1 1 1 1 1 1 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0] fitness = 9767
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
 	for seed1429
-best individual = [1 1 1 1 1 1 1 1 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0] fitness = 9767
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
 	for seed1667
-best individual = [1 1 1 1 1 1 1 1 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0] fitness = 9767
+best individual = [0 1 1 0 1 0 0 1 1 1] fitness = 294
 	for seed1647
-best individual = [1 1 1 1 1 1 1 1 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0] fitness = 9767
-Mean = 9766.6 Standard Deviation = 0.7999999999999999
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+Mean = 294.8 Standard Deviation = 0.4
+at parameters (10.0, 200, 0.02, 0.99, 0.01, 8, 8)
+
+at dataset10_269
+	for seed1562
+best individual = [0 1 1 0 1 0 0 1 1 1] fitness = 294
+	for seed1574
+best individual = [0 1 0 0 1 1 0 1 1 1] fitness = 297
+	for seed1429
+best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+	for seed1667
+best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+	for seed1647
+best individual = [0 1 1 0 0 1 0 0 1 1] fitness = 279
+Mean = 291.2 Standard Deviation = 6.273754856543249
+at parameters (10.0, 200, 0.02, 0.95, 0.05, 2, 2)
+
+at dataset10_269
+	for seed1562
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1574
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1429
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1667
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1647
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+Mean = 295.0 Standard Deviation = 0.0
+at parameters (10.0, 200, 0.02, 0.95, 0.05, 5, 5)
+
+at dataset10_269
+	for seed1562
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1574
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1429
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1667
+best individual = [0 1 1 0 1 0 0 1 1 1] fitness = 294
+	for seed1647
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+Mean = 294.8 Standard Deviation = 0.4
+at parameters (10.0, 200, 0.02, 0.95, 0.05, 8, 8)
+
+at dataset10_269
+	for seed1562
+best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+	for seed1574
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1429
+best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+	for seed1667
+best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+	for seed1647
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+Mean = 293.8 Standard Deviation = 0.9797958971132712
+at parameters (10.0, 200, 0.02, 0.9, 0.1, 2, 2)
+
+at dataset10_269
+	for seed1562
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1574
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1429
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1667
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1647
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+Mean = 295.0 Standard Deviation = 0.0
+at parameters (10.0, 200, 0.02, 0.9, 0.1, 5, 5)
+
+at dataset10_269
+	for seed1562
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1574
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1429
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1667
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1647
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+Mean = 295.0 Standard Deviation = 0.0
+at parameters (10.0, 200, 0.02, 0.9, 0.1, 8, 8)
+
+at dataset10_269
+	for seed1562
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1574
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1429
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1667
+best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+	for seed1647
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+Mean = 294.6 Standard Deviation = 0.8
