@@ -1,0 +1,24 @@
+at dataset10_269
+	for seed1562
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1574
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1429
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1667
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+	for seed1647
+best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+Mean = 295.0 Standard Deviation = 0.0
+at dataset23_10000
+	for seed1562
+best individual = [1 1 1 1 1 1 0 1 0 0 0 1 0 0 0 1 1 0 0 0 0 0 0] fitness = 9765
+	for seed1574
+best individual = [1 1 1 1 1 1 1 1 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0] fitness = 9767
+	for seed1429
+best individual = [1 1 1 1 1 1 1 1 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0] fitness = 9767
+	for seed1667
+best individual = [1 1 1 1 1 1 1 1 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0] fitness = 9767
+	for seed1647
+best individual = [1 1 1 1 1 1 1 1 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0] fitness = 9767
+Mean = 9766.6 Standard Deviation = 0.7999999999999999
