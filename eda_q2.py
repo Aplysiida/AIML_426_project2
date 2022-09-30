@@ -65,7 +65,7 @@ Returns several values: best solution, best solution's fitness, average of best 
 """
 
 def PBIL(
-    fitness_func, value_func, feature_num, rng, pop_size = 100, max_iter = 1000, max_convergence_iter = 50,
+    fitness_func, value_func, feature_num, rng, pop_size = 100, max_iter = 1000, max_convergence_iter = 20,
     mut_rate = 0.02, mut_shift = 0.05, num_best = 5, num_worst = 5, max_p = 0.9, min_p = 0.1, learning_rate=0.1):
     p = np.linspace(start=0.5, stop=0.5, num=feature_num) #initialise prob vector
 
@@ -125,15 +125,18 @@ if __name__ == "__main__":
     #store dataset as (num of items, bag capacity, data)
     datasets = [parse_data(filepath=filepath) for filepath in filepaths] #parse files
     dataset_names = ['10_269','23_10000','100_995']
-    #dataset parameters stored as (alpha, blah blah blah)
+    #dataset parameters stored as (alpha, popsize, mutation_shift, max_p, min_p, n_best, n_worst)
     dataset_parameters = [
-        (3.0, 1), #10_269
-        (3.0, 1), #23_10000
-        (10.0, 1)  #100_995
+        (3.0, 100, 0.05, 0.98, 0.02, 2, 2), #10_269
+        (3.0, 100, 0.05, 0.95, 0.05, 5, 5), #23_10000
+        (10.0, 200, 0.05, 0.95, 0.05, 5, 5)  #100_995
     ]
 
     fit_func = lambda ind : np.sum(ind)
     seeds = np.random.default_rng(seed=50).integers(low=0, high=2000, size=5)
+
+    datasets = datasets[2:3]
+    dataset_parameters = dataset_parameters[2:3]
 
     for i, (item_num, capacity, dataset) in enumerate(datasets):
         current_parameters = dataset_parameters[i]
@@ -151,7 +154,13 @@ if __name__ == "__main__":
                 fitness_func=lambda x : fitness_function(individual=x, dataset=dataset, penalty_coeff=current_parameters[0], max_weight=capacity), 
                 value_func=lambda x : value_fitness(individual=x, dataset=dataset),
                 feature_num=item_num, 
-                rng=np.random.default_rng(seed=seed)
+                rng=np.random.default_rng(seed=seed),
+                pop_size=current_parameters[1],
+                mut_shift=current_parameters[2],
+                max_p= current_parameters[3],
+                min_p= current_parameters[4],
+                num_best=current_parameters[5],
+                num_worst=current_parameters[6]
                 )
             print('best individual = ', best_ind,' fitness = ',best_fitness)
             best_fitnesses.append(best_fitness)

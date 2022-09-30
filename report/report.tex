@@ -1,5 +1,8 @@
 \documentclass{article}
 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 \title{AIML426 Project 2 Report}
 \date{}
 
@@ -21,8 +24,56 @@ Where $M=$ the number of chosen items in the solution, $v=$ value and $w=$ weigh
 \subsubsection*{EDA Algorithm}
 There are two algorithms to select from for this problem: UMDA and PBIL. UMBA calculates the probability vector as the mean vector of the current generation’s population’s individuals while PBIL's probability is influenced only by the best and worst individuals in the population. PBIL focuses more on exploitation compared to UMDA since PBIL ignores individuals in the population that UMDA considers. But exploration can be implemented into PBIL using the mutation operator, something that UMDA does not have. This balance between exploitation and exploration means that PBIL was chosen for this problem. \par
 \subsubsection*{PBIL Design}
+The mutation operator in PBIL is used to encourage exploration in the solution space but it introduces more hyperparameters, which are the mutation rate and mutation shift parameters, to tune and an extra calculation in the probability vector evaluation. Even with these issues, for this problem the mutation operator is implemented to help understand all parts of the PBIL algorithm. The psuedocode of the mutation function is shown below: \par
+\begin{algorithm}
+	\caption{PBIL Probability Mutation}
+	\begin{algorithmic}
+		\For{$i \gets length(p) $}
+			\If{$random[0,1] < mut\_rate$}
+				\State{$p_i \gets p_i * (1.0-mut\_shift) + random(0.0 or 1.0) * mut\_shift$}
+			\EndIf
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+\noindent PBIL stops when the generation either reaches the maximum number of iterations or reaches convergence. Convergence is defined by 20 generations where the changes in the best average fitness between the generations is too small to be notable. Convergence is implemented to improve execution time of problems that were likely to be solved early. The maximum number of iterations stopping criteria is used to prevent PBIL from running forever if convergence is never achieved in the problem. \par
+\noindent New solutions are generated using the probability vector which stores the probability that each bit’s value will be 1.  PBIL iterates through each element of the probability vector and generates a bit based on the probability at the current vector position and stores that bit in the same position in the individual. The result will be a bit vector used to represent the knapsack selected item combination. \par
+\noindent The probability vector evolves using three stages. The first stage iterates through the best individuals in the population and changes the probability vector using: \par 
+\begin{algorithm}
+	\caption{PBIL Best Individuals Influence}
+	\begin{algorithmic}
+		\For{$i \gets best\_N $}
+			\State{$p \gets p + \eta * (ind_i - p)$}
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+The second stage iterates through the worst individuals in the population and changes the probability vector using the same formula from the first stage but using $-\eta$ for $\eta$ instead. The third stage is the mutation operator which mutates the values in the probability vector using the formula with the parameters $mut\_rate$ and $mut\_shift$ are defined by the user. \par
 \subsubsection*{EDA Parameters}
-\cite{baluja1994population}
+The hyperparameters used by PBIL are 
+\begin{itemize}
+	\item Population Size
+	\item Maximum Iterations
+	\item Mutation Rate
+	\item Mutation Shift
+	\item Number of Best Individuals
+	\item Number of Worst Individuals
+	\item Maximum Probability
+	\item Minimum Probability
+	\item Learning Rate
+\end{itemize}
+The initial values set for population size, mutation rate and mutation shift are the values defined in the original PBIL paper \cite{baluja1994population}. These values are:
+\begin{center}
+\begin{tabular}{|c|c|}
+	\hline
+	Population Size & 100 \\
+	\hline
+	Mutation Rate & 0.02 \\
+	\hline
+	Mutation Shift & 0.05 \\
+	\hline
+\end{tabular}
+\end{center}
+\noindent For the first dataset, the solution space of valid solutions is small, so exploitation is focused on for this dataset to find the best solution quickly. Thus, the range of probability values allowed is set to [0.02, 0.98] to encourage retaining the information from the previous populations in the probability vector. The number of best and worst solutions to look at is set to 2 for each to once again encourage a greedier approach to finding the optimal solution. \par
+\noindent For the second dataset, the solution space is bigger, so more exploration is encouraged, the probability range is decreased to [0.05, 0.95] and the number of best and worst solutions is increased to 5 to increase the amount the probability vector and populations can change through the generations. \par
 \subsection*{Results and Discussion}
 \subsection*{Conclusion}
 
