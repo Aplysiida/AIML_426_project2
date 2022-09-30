@@ -134,9 +134,9 @@ if __name__ == "__main__":
     fit_func = lambda ind : np.sum(ind)
     seeds = np.random.default_rng(seed=50).integers(low=0, high=2000, size=5)
 
-    datasets = datasets[:1]
+    datasets = datasets[2:3]
     #dataset_parameters = dataset_parameters[2:3]
-    dataset_names = dataset_names[:1]
+    dataset_names = dataset_names[2:3]
 
     f = open('output.txt', 'w')
 
