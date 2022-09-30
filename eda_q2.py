@@ -85,7 +85,7 @@ def PBIL(
 
         #calculate best average and check if converging currently
         current_best_avg = np.average([value_func(best) for best in best_individuals])
-        if(np.abs(current_best_avg - prev_best_avg) < 0.00001):
+        if(np.abs(current_best_avg - prev_best_avg) < 0.0000000000001):
             convergence_iter += 1
         prev_best_avg = current_best_avg
         best_avg.append(current_best_avg)
@@ -129,7 +129,7 @@ if __name__ == "__main__":
     dataset_parameters = [
         (3.0, 100, 0.05, 0.98, 0.02, 2, 2), #10_269
         (3.0, 100, 0.05, 0.95, 0.05, 5, 5), #23_10000
-        (10.0, 200, 0.05, 0.95, 0.05, 5, 5)  #100_995
+        (10.0, 200, 0.01, 0.99, 0.05, 2, 2)  #100_995
     ]
 
     fit_func = lambda ind : np.sum(ind)
@@ -137,6 +137,7 @@ if __name__ == "__main__":
 
     datasets = datasets[2:3]
     dataset_parameters = dataset_parameters[2:3]
+    dataset_names = dataset_names[2:3]
 
     for i, (item_num, capacity, dataset) in enumerate(datasets):
         current_parameters = dataset_parameters[i]

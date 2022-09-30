@@ -2,6 +2,7 @@
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{graphicx}
 
 \title{AIML426 Project 2 Report}
 \date{}
@@ -74,7 +75,80 @@ The initial values set for population size, mutation rate and mutation shift are
 \end{center}
 \noindent For the first dataset, the solution space of valid solutions is small, so exploitation is focused on for this dataset to find the best solution quickly. Thus, the range of probability values allowed is set to [0.02, 0.98] to encourage retaining the information from the previous populations in the probability vector. The number of best and worst solutions to look at is set to 2 for each to once again encourage a greedier approach to finding the optimal solution. \par
 \noindent For the second dataset, the solution space is bigger, so more exploration is encouraged, the probability range is decreased to [0.05, 0.95] and the number of best and worst solutions is increased to 5 to increase the amount the probability vector and populations can change through the generations. \par
+\noindent add third dataset parameters \par
+
 \subsection*{Results and Discussion}
+The average fitness of the best is calculated by using the best individuals in the population, this uses the same best individuals which are used for influencing the probability vector. \par 
+\subsection*{10\_269 Dataset}
+\begin{center}
+\begin{tabular}{|c|c|}
+	\hline
+	Average Fitness of Best Mean & Average Fitness of Best Standard Deviation \\
+	\hline
+	295.0 & 0.0 \\
+	\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		Seed & Number of iterations \\
+		\hline
+		1562 & 24 \\
+		\hline
+		1574 & 25 \\
+		\hline
+		1429 & 27 \\
+		\hline
+		1667 & 27 \\
+		\hline
+		1647 & 26 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{knapsack_10_269.png}
+	\caption{Convergence Curve}
+\end{figure}
+
+\subsection*{23\_10000 Dataset}
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		Average Fitness of Best Average & Average Fitness of Best Standard Deviation \\
+		\hline
+		9766.6 & 0.7999.. \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		Seed & Number of iterations \\
+		\hline
+		1562 & 47 \\
+		\hline
+		1574 & 43 \\
+		\hline
+		1429 & 54 \\
+		\hline
+		1667 & 46 \\
+		\hline
+		1647 & 48 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{knapsack_23_10000.png}
+	\caption{Convergence Curve}
+\end{figure}
+
 \subsection*{Conclusion}
 
 \bibliographystyle{acm}
