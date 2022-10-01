@@ -1,126 +1,234 @@
-at parameters (10.0, 200, 0.02, 0.99, 0.01, 2, 2)
 
-at dataset10_269
-	for seed1562
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1574
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1429
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1667
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1647
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-Mean = 295.0 Standard Deviation = 0.0
-at parameters (10.0, 200, 0.02, 0.99, 0.01, 5, 5)
 
-at dataset10_269
-	for seed1562
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1574
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1429
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1667
-best individual = [0 1 1 0 1 0 0 1 1 1] fitness = 294
-	for seed1647
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-Mean = 294.8 Standard Deviation = 0.4
-at parameters (10.0, 200, 0.02, 0.99, 0.01, 8, 8)
+at parameters (30.0, 200, 0.02, 0.99, 0.01, 2, 2)
 
-at dataset10_269
+at dataset100_995
 	for seed1562
-best individual = [0 1 1 0 1 0 0 1 1 1] fitness = 294
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0] fitness = 1497
 	for seed1574
-best individual = [0 1 0 0 1 1 0 1 1 1] fitness = 297
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1438
 	for seed1429
-best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+best individual = [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0] fitness = 1382
 	for seed1667
-best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1401
 	for seed1647
-best individual = [0 1 1 0 0 1 0 0 1 1] fitness = 279
-Mean = 291.2 Standard Deviation = 6.273754856543249
-at parameters (10.0, 200, 0.02, 0.95, 0.05, 2, 2)
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1459
+Mean = 1435.4 Standard Deviation = 40.9712094036776
 
-at dataset10_269
-	for seed1562
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1574
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1429
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1667
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1647
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-Mean = 295.0 Standard Deviation = 0.0
-at parameters (10.0, 200, 0.02, 0.95, 0.05, 5, 5)
 
-at dataset10_269
-	for seed1562
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1574
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1429
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1667
-best individual = [0 1 1 0 1 0 0 1 1 1] fitness = 294
-	for seed1647
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-Mean = 294.8 Standard Deviation = 0.4
-at parameters (10.0, 200, 0.02, 0.95, 0.05, 8, 8)
+at parameters (30.0, 200, 0.02, 0.99, 0.01, 5, 5)
 
-at dataset10_269
+at dataset100_995
 	for seed1562
-best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+best individual = [0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1329
 	for seed1574
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1347
 	for seed1429
-best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+best individual = [0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1362
 	for seed1667
-best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+best individual = [0 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1389
 	for seed1647
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-Mean = 293.8 Standard Deviation = 0.9797958971132712
-at parameters (10.0, 200, 0.02, 0.9, 0.1, 2, 2)
+best individual = [0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1319
+Mean = 1349.2 Standard Deviation = 24.79032069175387
 
-at dataset10_269
-	for seed1562
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1574
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1429
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1667
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1647
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-Mean = 295.0 Standard Deviation = 0.0
-at parameters (10.0, 200, 0.02, 0.9, 0.1, 5, 5)
 
-at dataset10_269
-	for seed1562
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1574
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1429
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1667
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-	for seed1647
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-Mean = 295.0 Standard Deviation = 0.0
-at parameters (10.0, 200, 0.02, 0.9, 0.1, 8, 8)
+at parameters (30.0, 200, 0.02, 0.99, 0.01, 8, 8)
 
-at dataset10_269
+at dataset100_995
 	for seed1562
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1136
 	for seed1574
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1393
 	for seed1429
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
+best individual = [0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 1 0 0 0 0 0 1
+ 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1088
 	for seed1667
-best individual = [0 1 0 0 0 1 0 1 1 1] fitness = 293
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0] fitness = 1332
 	for seed1647
-best individual = [0 1 1 1 0 0 0 1 1 1] fitness = 295
-Mean = 294.6 Standard Deviation = 0.8
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1
+ 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0] fitness = 1246
+Mean = 1239.0 Standard Deviation = 114.73796233156662
+
+
+at parameters (30.0, 200, 0.02, 0.95, 0.05, 2, 2)
+
+at dataset100_995
+	for seed1562
+best individual = [0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1153
+	for seed1574
+best individual = [0 0 0 0 0 0 1 0 0 0 1 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1088
+	for seed1429
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1239
+	for seed1667
+best individual = [0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1178
+	for seed1647
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1114
+Mean = 1154.4 Standard Deviation = 52.45417047289948
+
+
+at parameters (30.0, 200, 0.02, 0.95, 0.05, 5, 5)
+
+at dataset100_995
+	for seed1562
+best individual = [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 782
+	for seed1574
+best individual = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 1
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1230
+	for seed1429
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0] fitness = 901
+	for seed1667
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1
+ 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1088
+	for seed1647
+best individual = [0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1260
+Mean = 1052.2 Standard Deviation = 185.4426056762577
+
+
+at parameters (30.0, 200, 0.02, 0.95, 0.05, 8, 8)
+
+at dataset100_995
+	for seed1562
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+ 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0] fitness = 876
+	for seed1574
+best individual = [0 1 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 1 0
+ 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 890
+	for seed1429
+best individual = [0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0] fitness = 1068
+	for seed1667
+best individual = [0 0 1 0 0 0 0 0 0 0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0
+ 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 952
+	for seed1647
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1147
+Mean = 986.6 Standard Deviation = 104.99066625181497
+
+
+at parameters (30.0, 200, 0.02, 0.9, 0.1, 2, 2)
+
+at dataset100_995
+	for seed1562
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0] fitness = 2571
+	for seed1574
+best individual = [0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0] fitness = 2006
+	for seed1429
+best individual = [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 1
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1984
+	for seed1667
+best individual = [0 0 1 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 1 0
+ 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0] fitness = 2302
+	for seed1647
+best individual = [0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 1713
+Mean = 2115.2 Standard Deviation = 294.46588936581435
+
+
+at parameters (30.0, 200, 0.02, 0.9, 0.1, 5, 5)
+
+at dataset100_995
+	for seed1562
+best individual = [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0
+ 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 1 1 0 1 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0] fitness = 2700
+	for seed1574
+best individual = [0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0] fitness = 2279
+	for seed1429
+best individual = [0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0] fitness = 2793
+	for seed1667
+best individual = [0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0] fitness = 1677
+	for seed1647
+best individual = [0 0 0 0 0 0 1 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+ 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0] fitness = 1672
+Mean = 2224.2 Standard Deviation = 481.09766160313023
+
+
+at parameters (30.0, 200, 0.02, 0.9, 0.1, 8, 8)
+
+at dataset100_995
+	for seed1562
+best individual = [0 0 0 0 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 1 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0] fitness = 2772
+	for seed1574
+best individual = [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 1 0 0
+ 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 2244
+	for seed1429
+best individual = [1 0 1 0 0 0 1 0 0 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0] fitness = 2669
+	for seed1667
+best individual = [0 0 0 0 0 0 0 0 0 1 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+ 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0
+ 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] fitness = 2011
+	for seed1647
+best individual = [0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0
+ 0 1 0 0 1 0 0 0 0 1 0 1 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0] fitness = 1770
+Mean = 2293.2 Standard Deviation = 381.12223760888054
