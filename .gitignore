@@ -1,6 +1,13 @@
 # ignore data
 /data/
 
+#ignore extra latex files
+*.aux
+*.bbl
+*.blg
+*.synctex.gz
+*.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

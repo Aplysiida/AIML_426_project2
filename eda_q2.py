@@ -129,15 +129,11 @@ if __name__ == "__main__":
     dataset_parameters = [
         (3.0, 100, 0.05, 0.98, 0.02, 2, 2), #10_269
         (3.0, 100, 0.05, 0.95, 0.05, 5, 5), #23_10000
-        (10.0, 200, 0.01, 0.99, 0.05, 2, 2)  #100_995
+        (30.0, 200, 0.02, 0.99, 0.01, 2, 2)  #100_995
     ]
 
     fit_func = lambda ind : np.sum(ind)
     seeds = np.random.default_rng(seed=50).integers(low=0, high=2000, size=5)
-
-    datasets = datasets[2:3]
-    dataset_parameters = dataset_parameters[2:3]
-    dataset_names = dataset_names[2:3]
 
     for i, (item_num, capacity, dataset) in enumerate(datasets):
         current_parameters = dataset_parameters[i]
