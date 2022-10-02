@@ -1,13 +1,8 @@
 Question 1:
 Choice of EP and DE/ES:
-EP choices:
-basic-EP
-meta-EP
-fast-EP
-IEP
 
 Goal is to find minimum values of two continuous functions. Solution will be set X where x_i is a parameter for the function, range of x is [-30,30]. Will solve problem for D=20 so len(X) = 20.
-Ep to choose:
+Use combination of Fast-EP and Improved-EP 
 
 ES:
 (1+1)-ES
