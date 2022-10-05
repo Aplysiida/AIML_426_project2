@@ -77,9 +77,11 @@ def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, 
         #get best individuals from both parent pop and mutated pop and their variences to get next generation's parent pop
         combined_pop_var = pop_var+mutated_pop_var
         #select using tournament selection here
+        opponents_num = 4
+        pop_var = tournament_sel(pop=combined_pop_var, select_num=pop_size, opponents_num=opponents_num, fitness_func=fitness_func, rng=rng)
         
-        combined_pop_var.sort(key= lambda ind : fitness_func(ind[0]))    #sort by minimum fitness
-        pop_var = combined_pop_var[:pop_size]  
+        #combined_pop_var.sort(key= lambda ind : fitness_func(ind[0]))    #sort by minimum fitness
+        #pop_var = combined_pop_var[:pop_size]  
 
         #calc best average from top 5 individuals and check for convergence
         current_best_avg = np.average([fitness_func(x) for x,_ in pop_var[:6]])
