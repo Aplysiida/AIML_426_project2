@@ -2,6 +2,11 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+import random
+
+"""
+Fitness functions to use
+"""
 def rosenbrock(x_values):
     sum_value = 0.0
     for i in range(len(x_values)-1):
@@ -18,10 +23,28 @@ def griewanks(x_values):
         product *= np.cos(x/(np.sqrt(i+1))) #i+1 since python starts at 0
     return sum_value - product + 1.0
 
+"""
+Generate a vector that could represent an individual or variance
+"""
 def gen_vector(feature_num, rng, min_value, max_value):
     x_range = np.abs(max_value)+np.abs(min_value)
     return np.array([(rng.random()*x_range)+min_value for i in range(feature_num)])
 
+"""
+Tournment selection used for selecting best individuals for next generation
+"""
+def tournament_sel(pop, select_num, opponents_num, fitness_func, rng):
+    selected = []
+    for _ in range(select_num):
+        opponents = rng.choice(pop, size=(opponents_num,1))
+        #opponents = [pop[rng.integers(low=0, high=(len(pop)-1))] for _ in range(opponents_num)]
+        opponents.sort(key=lambda ind : fitness_func(ind[0]))
+        selected.append(opponents[0])
+    return selected
+
+"""
+Combination of Fast-EP and Improved-EP
+"""
 def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, variance_threshold=0.6, c=1.0, pop_size=50, max_iter=1000, max_convergence_iter = 20):
     #variance_threshold_vector = np.full((feature_num,1), variance_threshold)
     pop_var = [ 
@@ -78,6 +101,19 @@ if __name__ == "__main__":
     variance_range = value_range/10.0
     variance_threshold = variance_range/10.0
 
+    feature_num = 3
+    rng = np.random.default_rng(5)
+    min_x = -30.0
+    max_x = 30.0
+    pop = [gen_vector(feature_num, rng, min_value=min_x, max_value=max_x) for _ in range(5)]
+    [print(p) for p in pop]
+    print('------------')
+
+    fit = lambda ind : np.sum(ind)
+    #select pop
+    selected = tournament_sel(pop=pop, select_num = 2, opponents_num=4, fitness_func=fit, rng=rng)
+    [print(s) for s in selected]
+    """
     for i,fitness_function in enumerate(fitness_functions):
         print('At function ',fitness_functions_names[i])
         best_fitnesses = [] #store all best fitnesses from all the seeds
@@ -104,3 +140,4 @@ if __name__ == "__main__":
     D = 50
     fitness_functions = fitness_functions[1:]
     fitness_functions_names = fitness_functions_names[1:]
+    """
