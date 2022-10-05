@@ -58,30 +58,38 @@ def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, 
     best_avg = [] #average fitness of num_best individuals for each generation
     best_individual = pop_var[0][0] #get random individual for initial best
 
+    #used for updating mutation/variance level
+    tau = 1.0/(np.sqrt(2.0*np.sqrt(feature_num)))
+    tau_prime = 1.0/np.sqrt(2.0*feature_num)
+
     iter_num = 0
     convergence_iter = 0
     prev_best_avg = -1.0 
     while((iter_num < max_iter) & (convergence_iter < max_convergence_iter)):    #while not reached stopping criteria
         #pop_fitness = [fitness_func(ind) for (ind, _) in pop_var]  #calc fitness for each individual
         mutated_pop_var = []
-        for x,v in pop_var: #generate mutated pop
+        for x,m in pop_var: #generate mutated pop
+            #create distribution vectors for x and mutation separately
             rand_x = np.array([rng.standard_cauchy() for j in range(feature_num)])
-            rand_v = np.array([rng.standard_cauchy() for j in range(feature_num)])
+            rand_m = np.array([rng.standard_cauchy() for j in range(feature_num)])            
 
-            new_x = x + rand_x*np.sqrt(v)
-            new_v = v + rand_v*np.sqrt(c*v)
+            rand = rng.standard_cauchy()
+
+            new_x = x + rand_x*m
+            new_m = m*np.exp(tau_prime*rand + tau*rand_m)
+            #new_m = np.array([m_value + np.exp(tau_prime*() + tau*()) for m_value in m])
+            #new_m = m*np.exp()
+            #new_x = x + rand_x*np.sqrt(m)
+            #new_m = m + rand_m*np.sqrt(c*m)
             #clamp v values between 0.0 and threshold
-            new_v = np.array([np.min([np.max([v_value, 0.0]), variance_threshold]) for v_value in new_v])
+            new_m = np.array([np.min([np.max([v_value, 0.0]), variance_threshold]) for v_value in new_m])
 
-            mutated_pop_var.append((new_x, new_v))
+            mutated_pop_var.append((new_x, new_m))
         #get best individuals from both parent pop and mutated pop and their variences to get next generation's parent pop
         combined_pop_var = pop_var+mutated_pop_var
         #select using tournament selection here
-        opponents_num = 4
+        opponents_num = 10
         pop_var = tournament_sel(pop=combined_pop_var, select_num=pop_size, opponents_num=opponents_num, fitness_func=fitness_func, rng=rng)
-        
-        #combined_pop_var.sort(key= lambda ind : fitness_func(ind[0]))    #sort by minimum fitness
-        #pop_var = combined_pop_var[:pop_size]  
 
         #calc best average from top 5 individuals and check for convergence
         current_best_avg = np.average([fitness_func(x) for x,_ in pop_var[:6]])
