@@ -34,12 +34,16 @@ def gen_vector(feature_num, rng, min_value, max_value):
 Tournment selection used for selecting best individuals for next generation
 """
 def tournament_sel(pop, select_num, opponents_num, fitness_func, rng):
+    pop_copy = pop.copy()
     selected = []
     for _ in range(select_num):
-        opponents = rng.choice(pop, size=(opponents_num,1))
-        #opponents = [pop[rng.integers(low=0, high=(len(pop)-1))] for _ in range(opponents_num)]
-        opponents.sort(key=lambda ind : fitness_func(ind[0]))
-        selected.append(opponents[0])
+        indices = rng.integers(low=0, high=(len(pop_copy)-1), size=opponents_num)
+        opponents = [ (pop_copy[i], i) for i in indices]
+        
+        opponents.sort(key=lambda ind : fitness_func(ind[0][0]))
+        to_select = opponents[0]
+        selected.append(to_select[0]) 
+        pop_copy.pop(to_select[1])   #to avoid selecting the same object
     return selected
 
 """
@@ -72,6 +76,8 @@ def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, 
             mutated_pop_var.append((new_x, new_v))
         #get best individuals from both parent pop and mutated pop and their variences to get next generation's parent pop
         combined_pop_var = pop_var+mutated_pop_var
+        #select using tournament selection here
+        
         combined_pop_var.sort(key= lambda ind : fitness_func(ind[0]))    #sort by minimum fitness
         pop_var = combined_pop_var[:pop_size]  
 
@@ -101,19 +107,6 @@ if __name__ == "__main__":
     variance_range = value_range/10.0
     variance_threshold = variance_range/10.0
 
-    feature_num = 3
-    rng = np.random.default_rng(5)
-    min_x = -30.0
-    max_x = 30.0
-    pop = [gen_vector(feature_num, rng, min_value=min_x, max_value=max_x) for _ in range(5)]
-    [print(p) for p in pop]
-    print('------------')
-
-    fit = lambda ind : np.sum(ind)
-    #select pop
-    selected = tournament_sel(pop=pop, select_num = 2, opponents_num=4, fitness_func=fit, rng=rng)
-    [print(s) for s in selected]
-    """
     for i,fitness_function in enumerate(fitness_functions):
         print('At function ',fitness_functions_names[i])
         best_fitnesses = [] #store all best fitnesses from all the seeds
@@ -140,4 +133,3 @@ if __name__ == "__main__":
     D = 50
     fitness_functions = fitness_functions[1:]
     fitness_functions_names = fitness_functions_names[1:]
-    """
