@@ -87,6 +87,7 @@ def PBIL(
         current_best_avg = np.average([value_func(best) for best in best_individuals])
         if(np.abs(current_best_avg - prev_best_avg) < 0.0000000000001):
             convergence_iter += 1
+        else: convergence_iter = 0
         prev_best_avg = current_best_avg
         best_avg.append(current_best_avg)
         best_individual = pop[0]
