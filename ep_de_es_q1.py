@@ -3,6 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 import random
+import warnings
 
 """
 Fitness functions to use
@@ -50,6 +51,7 @@ def tournament_sel(pop, select_num, opponents_num, fitness_func, rng):
 Combination of Fast-EP and Improved-EP
 """
 def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, variance_threshold=0.6, c=1.0, pop_size=50, max_iter=1000, max_convergence_iter = 20):
+    warnings.filterwarnings("ignore")
     #variance_threshold_vector = np.full((feature_num,1), variance_threshold)
     pop_var = [ 
         (gen_vector(feature_num, rng, min_value=min_x, max_value=max_x), gen_vector(feature_num, rng, min_value=0.0, max_value=variance_range))
@@ -77,11 +79,6 @@ def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, 
 
             new_x = x + rand_x*m
             new_m = m*np.exp(tau_prime*rand + tau*rand_m)
-            #new_m = np.array([m_value + np.exp(tau_prime*() + tau*()) for m_value in m])
-            #new_m = m*np.exp()
-            #new_x = x + rand_x*np.sqrt(m)
-            #new_m = m + rand_m*np.sqrt(c*m)
-            #clamp v values between 0.0 and threshold
             new_m = np.array([np.min([np.max([v_value, 0.0]), variance_threshold]) for v_value in new_m])
 
             mutated_pop_var.append((new_x, new_m))
