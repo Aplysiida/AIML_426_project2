@@ -74,8 +74,7 @@ def PBIL(
 
     iter_num = 0
     convergence_iter = 0
-    prev_best_avg = -1.0
-    #for i in range(max_iter):  
+    prev_best_avg = -1.0 
     while((iter_num < max_iter) & (convergence_iter < max_convergence_iter)):   #while not reached stopping criteria
         pop = [gen_individual(p, feature_num, rng) for _ in range(pop_size)] #use p vector to gen pop
         pop.sort(key=fitness_func, reverse=True)  #sort individuals by fitness
@@ -87,6 +86,7 @@ def PBIL(
         current_best_avg = np.average([value_func(best) for best in best_individuals])
         if(np.abs(current_best_avg - prev_best_avg) < 0.0000000000001):
             convergence_iter += 1
+        else: convergence_iter = 0
         prev_best_avg = current_best_avg
         best_avg.append(current_best_avg)
         best_individual = pop[0]
@@ -109,7 +109,6 @@ def fitness_function(individual, dataset, penalty_coeff, max_weight):
     if(not individual.__contains__(1)): return 0.0    #to avoid empty knapsack situation
     values, weights = zip(*[ dataset.iloc[i] for i, pickup in enumerate(individual) if (pickup == 1)])
     return np.sum(values) - penalty_coeff*np.max([0.0, np.sum(weights) - capacity])
-    #return np.sum(values) - penalty_coeff*(np.sum(weights) - capacity)
 
 """
 Evaluates total sum of values in individual while ignoring weight constraint
