@@ -50,7 +50,7 @@ def tournament_sel(pop, select_num, opponents_num, fitness_func, rng):
 """
 Combination of Fast-EP and Improved-EP
 """
-def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, variance_threshold=0.6, c=1.0, pop_size=50, max_iter=1000, max_convergence_iter = 20):
+def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, variance_threshold=0.6, pop_size=50, max_iter=1000, max_convergence_iter = 20):
     warnings.filterwarnings("ignore")
     #variance_threshold_vector = np.full((feature_num,1), variance_threshold)
     pop_var = [ 
@@ -123,7 +123,7 @@ def run_EP(D, variance_range, variance_threshold, seeds, fitness_functions, fitn
 if __name__ == "__main__":
     #run EP
     D = 20
-    seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=30)
+    seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=3)
     fitness_functions = [rosenbrock , griewanks]
     fitness_functions_names = ['Rosenbrock','Griewanks']
 
