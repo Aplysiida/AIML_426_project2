@@ -103,27 +103,13 @@ def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, 
     #return best
     return best_individual, fitness_func(best_individual), best_avg, iter_num
 
-if __name__ == "__main__":
-    #run EP
-    D = 20
-    seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=3)
-    fitness_functions = [rosenbrock , griewanks]
-    fitness_functions_names = ['Rosenbrock','Griewanks']
-
-    value_range = 60.0 #from -30.0 to 30.0
-    variance_range = value_range/10.0
-    variance_threshold = variance_range/10.0
-
+def run_EP(D, variance_range, variance_threshold, seeds, fitness_functions, fitness_functions_names):
     for i,fitness_function in enumerate(fitness_functions):
         print('At function ',fitness_functions_names[i])
         best_fitnesses = [] #store all best fitnesses from all the seeds
 
-        fig, axis = plt.subplots(1, len(seeds))
-        fig.set_figwidth(20)
-        fig.suptitle(fitness_functions_names[i]+' Convergence Curve')
-
         for j,seed in enumerate(seeds):
-            print('seed = ',seed)
+            print('\tseed = ',seed)
             best, best_fitness, best_avg, num_iter = EP(
                 fitness_func=fitness_function, 
                 feature_num=D, 
@@ -132,11 +118,24 @@ if __name__ == "__main__":
                 rng=np.random.default_rng(seed=seed)
             )
             best_fitnesses.append(best_fitness)
-            print('best = ',best,' best fitness = ',best_fitness,' iterations = ',num_iter)
-            sns.lineplot(x=range(num_iter), y=best_avg, ax=axis[j])
         print('Mean = ',np.average(best_fitnesses),' Standard Deviation = ', np.std(best_fitnesses))
-        plt.show()
+
+if __name__ == "__main__":
+    #run EP
+    D = 20
+    seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=30)
+    fitness_functions = [rosenbrock , griewanks]
+    fitness_functions_names = ['Rosenbrock','Griewanks']
+
+    value_range = 60.0 #from -30.0 to 30.0
+    variance_range = value_range/10.0
+    variance_threshold = variance_range/10.0
+
+    print('D = 50')
+    run_EP(D=D, variance_range=variance_range, variance_threshold=variance_threshold, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)
 
     D = 50
+    print('D = 20')
     fitness_functions = fitness_functions[1:]
     fitness_functions_names = fitness_functions_names[1:]
+    run_EP(D=D, variance_range=variance_range, variance_threshold=variance_threshold, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)
