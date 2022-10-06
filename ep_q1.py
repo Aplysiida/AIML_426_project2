@@ -34,7 +34,6 @@ Combination of Fast-EP and Improved-EP
 """
 def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, variance_threshold=0.6, pop_size=50, max_iter=1000, max_convergence_iter = 20):
     warnings.filterwarnings("ignore")
-    #variance_threshold_vector = np.full((feature_num,1), variance_threshold)
     pop_var = [ 
         (gen_vector(feature_num, rng, min_value=min_x, max_value=max_x), gen_vector(feature_num, rng, min_value=0.0, max_value=variance_range))
         for _ in range(pop_size)]    #gen pop and variance
@@ -85,38 +84,47 @@ def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, 
     #return best
     return best_individual, fitness_func(best_individual), best_avg, iter_num
 
-def run_EP(D, variance_range, variance_threshold, seeds, fitness_functions, fitness_functions_names):
+def run_EP(hyperparameters, D, seeds, fitness_functions, fitness_functions_names):
     for i,fitness_function in enumerate(fitness_functions):
         print('At function ',fitness_functions_names[i])
         best_fitnesses = [] #store all best fitnesses from all the seeds
+        hyperparameter = hyperparameters[i] 
 
         for j,seed in enumerate(seeds):
             print('\tseed = ',seed)
             best, best_fitness, best_avg, num_iter = EP(
                 fitness_func=fitness_function, 
                 feature_num=D, 
-                variance_range = variance_range,
-                variance_threshold=variance_threshold, 
+                variance_range=hyperparameter[0],
+                variance_threshold=hyperparameter[1],
                 rng=np.random.default_rng(seed=seed)
             )
+            print(' fitness = ',best_fitness,' iter num = ',num_iter)
             best_fitnesses.append(best_fitness)
         print('Mean = ',np.average(best_fitnesses),' Standard Deviation = ', np.std(best_fitnesses))
 
 if __name__ == "__main__":
     D = 20
-    seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=3)
+    seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=30)
     fitness_functions = [fitness_q1.rosenbrock , fitness_q1.griewanks]
     fitness_functions_names = ['Rosenbrock','Griewanks']
 
     value_range = 60.0 #from -30.0 to 30.0
+    #rosenbrock
     variance_range = value_range/10.0
     variance_threshold = variance_range/10.0
+    hyperparameters = [(variance_range, variance_threshold)]
+    #griewank
+    variance_range = value_range/10.0
+    variance_threshold = variance_range/10.0
+    hyperparameters.append((variance_range, variance_threshold))
 
     print('D = 20')
-    run_EP(D=D, variance_range=variance_range, variance_threshold=variance_threshold, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)
+    run_EP(hyperparameters=hyperparameters, D=D, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)
 
     D = 50
     print('D = 50')
     fitness_functions = fitness_functions[1:]
     fitness_functions_names = fitness_functions_names[1:]
-    run_EP(D=D, variance_range=variance_range, variance_threshold=variance_threshold, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)
+    hyperparameters = hyperparameters[1:]
+    run_EP(hyperparameters=hyperparameters, D=D, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)

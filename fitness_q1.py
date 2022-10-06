@@ -1,3 +1,5 @@
+import numpy as np
+
 """
 Fitness functions to use
 """
