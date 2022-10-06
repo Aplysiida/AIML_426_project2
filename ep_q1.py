@@ -2,27 +2,9 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-import random
 import warnings
 
-"""
-Fitness functions to use
-"""
-def rosenbrock(x_values):
-    sum_value = 0.0
-    for i in range(len(x_values)-1):
-        a = x_values[i]
-        b = x_values[i+1]
-        sum_value += 100.0 * pow(pow(a,2) - b, 2) + pow(a - 1.0 ,2)
-    return sum_value
-
-def griewanks(x_values):
-    sum_value = 0.0
-    product = 1.0
-    for i,x in enumerate(x_values):
-        sum_value += (pow(x,2))/4000.0
-        product *= np.cos(x/(np.sqrt(i+1))) #i+1 since python starts at 0
-    return sum_value - product + 1.0
+import fitness_q1
 
 """
 Generate a vector that could represent an individual or variance
@@ -121,21 +103,20 @@ def run_EP(D, variance_range, variance_threshold, seeds, fitness_functions, fitn
         print('Mean = ',np.average(best_fitnesses),' Standard Deviation = ', np.std(best_fitnesses))
 
 if __name__ == "__main__":
-    #run EP
     D = 20
     seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=3)
-    fitness_functions = [rosenbrock , griewanks]
+    fitness_functions = [fitness_q1.rosenbrock , fitness_q1.griewanks]
     fitness_functions_names = ['Rosenbrock','Griewanks']
 
     value_range = 60.0 #from -30.0 to 30.0
     variance_range = value_range/10.0
     variance_threshold = variance_range/10.0
 
-    print('D = 50')
+    print('D = 20')
     run_EP(D=D, variance_range=variance_range, variance_threshold=variance_threshold, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)
 
     D = 50
-    print('D = 20')
+    print('D = 50')
     fitness_functions = fitness_functions[1:]
     fitness_functions_names = fitness_functions_names[1:]
     run_EP(D=D, variance_range=variance_range, variance_threshold=variance_threshold, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)

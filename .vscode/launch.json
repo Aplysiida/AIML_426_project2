@@ -5,10 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python:EP and DE/ES Question 1",
+            "name": "Python: EP Question 1",
             "type": "python",
             "request": "launch",
-            "program": "ep_de_es_q1.py",
+            "program": "ep_q1.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: DE Question 1",
+            "type": "python",
+            "request": "launch",
+            "program": "de_q1.py",
             "console": "integratedTerminal",
             "justMyCode": true
         },
