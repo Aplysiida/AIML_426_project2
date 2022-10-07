@@ -32,8 +32,8 @@ def tournament_sel(pop, select_num, opponents_num, fitness_func, rng):
 """
 Combination of Fast-EP and Improved-EP
 """
-def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, variance_threshold=0.6, pop_size=50, max_iter=1000, max_convergence_iter = 20):
-    warnings.filterwarnings("ignore")
+def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, variance_threshold=0.6, pop_size=50, max_iter=2000, max_convergence_iter = 20):
+    #warnings.filterwarnings("ignore")
     pop_var = [ 
         (gen_vector(feature_num, rng, min_value=min_x, max_value=max_x), gen_vector(feature_num, rng, min_value=0.0, max_value=variance_range))
         for _ in range(pop_size)]    #gen pop and variance
@@ -54,13 +54,13 @@ def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, 
         for x,m in pop_var: #generate mutated pop
             #create distribution vectors for x and mutation separately
             rand_x = np.array([rng.standard_cauchy() for j in range(feature_num)])
-            rand_m = np.array([rng.standard_cauchy() for j in range(feature_num)])            
+            rand_m = np.array([rng.standard_cauchy() for j in range(feature_num)], dtype=np.float128)            
 
             rand = rng.standard_cauchy()
 
             new_x = x + rand_x*m
-            new_m = m*np.exp(tau_prime*rand + tau*rand_m)
-            new_m = np.array([np.min([np.max([v_value, 0.0]), variance_threshold]) for v_value in new_m])
+            #if value in np.exp is too big will cause overflow error so just replace with variance threshold
+            new_m = np.array([variance_threshold if (np.isinf(np.exp(tau_prime*rand + tau*r))) else np.exp(tau_prime*rand + tau*r) for r in rand_m])
 
             mutated_pop_var.append((new_x, new_m))
         #get best individuals from both parent pop and mutated pop and their variences to get next generation's parent pop
@@ -88,6 +88,7 @@ def run_EP(hyperparameters, D, seeds, fitness_functions, fitness_functions_names
     for i,fitness_function in enumerate(fitness_functions):
         print('At function ',fitness_functions_names[i])
         best_fitnesses = [] #store all best fitnesses from all the seeds
+        iterations = []
         hyperparameter = hyperparameters[i] 
 
         for j,seed in enumerate(seeds):
@@ -101,11 +102,12 @@ def run_EP(hyperparameters, D, seeds, fitness_functions, fitness_functions_names
             )
             print(' fitness = ',best_fitness,' iter num = ',num_iter)
             best_fitnesses.append(best_fitness)
-        print('Mean = ',np.average(best_fitnesses),' Standard Deviation = ', np.std(best_fitnesses))
+            iterations.append(num_iter)
+        print('Mean = ',np.average(best_fitnesses),' Standard Deviation = ', np.std(best_fitnesses),' Average Iterations Taken = ',np.average(iterations))
 
 if __name__ == "__main__":
     D = 20
-    seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=30)
+    seeds = np.random.default_rng(seed=5).integers(low=1,high=200,size=30)
     fitness_functions = [fitness_q1.rosenbrock , fitness_q1.griewanks]
     fitness_functions_names = ['Rosenbrock','Griewanks']
 
@@ -124,7 +126,7 @@ if __name__ == "__main__":
 
     D = 50
     print('D = 50')
-    fitness_functions = fitness_functions[1:]
+    fitness_functions = fitness_functions[:1]
     fitness_functions_names = fitness_functions_names[1:]
-    hyperparameters = hyperparameters[1:]
+    hyperparameters = hyperparameters[:1]
     run_EP(hyperparameters=hyperparameters, D=D, seeds=seeds, fitness_functions=fitness_functions, fitness_functions_names=fitness_functions_names)

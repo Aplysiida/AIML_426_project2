@@ -7,7 +7,7 @@ import fitness_q1
 def gen_individual(x_min, x_max, feature_num, rng):
     return np.array([x_min + rng.random()*(x_max-x_min) for _ in range(feature_num)])
 
-def DE(fitness_func, rng, feature_num, pop_size=50, max_iter=1000, max_convergence_iter = 20, x_min=0.0, x_max=1.0, scaling_f=0.5, crossover_rate=0.1):
+def DE(fitness_func, rng, feature_num, pop_size=50, max_iter=3000, max_convergence_iter = 20, x_min=0.0, x_max=1.0, scaling_f=0.5, crossover_rate=0.1):
     pop = [gen_individual(x_min, x_max, feature_num, rng) for _ in range(pop_size)]
     
     best_avg = [] #average fitness of num_best individuals for each generation
@@ -46,6 +46,7 @@ def run_de(hyperparameters, D, seeds, fitness_functions, fitness_functions_names
         print('At function ',fitness_functions_names[i])
         hyperparameter = hyperparameters[i]
         best_fitnesses = [] #store all best fitnesses from all the seeds
+        iterations = []
 
         for seed in seeds:
             print('Seed = ', seed)
@@ -60,16 +61,13 @@ def run_de(hyperparameters, D, seeds, fitness_functions, fitness_functions_names
                 crossover_rate=hyperparameter[1]
                 )
             best_fitnesses.append(best_fit)
-
-            print(' fitness = ',best_fit,' iter num = ',iter)
-            sns.lineplot(x=range(iter),y=best_avg)
-        print('Mean = ', np.average(best_fitnesses), ' Standard Deviation = ', np.std(best_fitnesses))
-        plt.show()
+            iterations.append(iter)
+        print('Mean = ', np.average(best_fitnesses), ' Standard Deviation = ', np.std(best_fitnesses),' Average Iterations Taken = ',np.average(iterations))
 
 if __name__ == "__main__":
     D = 20
     print('D = 20')
-    seeds = np.random.default_rng(seed=5).integers(low=0,high=200,size=30)
+    seeds = np.random.default_rng(seed=5).integers(low=1,high=200,size=30)
     fitness_functions = [fitness_q1.rosenbrock , fitness_q1.griewanks]
     fitness_functions_names = ['Rosenbrock','Griewanks']
 
@@ -84,6 +82,6 @@ if __name__ == "__main__":
 
     D = 50 
     print('D = 50')
-    fitness_functions = fitness_functions[1:]
-    fitness_functions_names = fitness_functions_names[1:]
+    fitness_functions = fitness_functions[:1]
+    fitness_functions_names = fitness_functions_names[:1]
     run_de(hyperparameters, D, seeds, fitness_functions, fitness_functions_names)
