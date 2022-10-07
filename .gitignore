@@ -1,6 +1,3 @@
-# ignore data
-/data/
-
 #ignore extra latex files
 *.aux
 *.bbl
