@@ -28,7 +28,7 @@ def DE(fitness_func, rng, feature_num, pop_size=50, max_iter=3000, max_convergen
         #selection
         if(fitness_func(offspring) < fitness_func(to_change)):
             pop[indices[0]] = offspring
-        num_iter += 1
+        
 
         #calc best average from top 5 individuals and check for convergence
         current_best_avg = np.average([fitness_func(x) for x in pop[:6]])
@@ -38,6 +38,8 @@ def DE(fitness_func, rng, feature_num, pop_size=50, max_iter=3000, max_convergen
         else: convergence_iter = 0
         #get best individual
         best_individual = pop[0]
+
+        num_iter += 1
 
     return best_individual, fitness_func(best_individual), best_avg, num_iter
 

@@ -54,7 +54,7 @@ def EP(fitness_func, feature_num, rng, min_x=-30, max_x=30, variance_range=6.0, 
         for x,m in pop_var: #generate mutated pop
             #create distribution vectors for x and mutation separately
             rand_x = np.array([rng.standard_cauchy() for j in range(feature_num)])
-            rand_m = np.array([rng.standard_cauchy() for j in range(feature_num)], dtype=np.float128)            
+            rand_m = np.array([rng.standard_cauchy() for j in range(feature_num)])            
 
             rand = rng.standard_cauchy()
 
