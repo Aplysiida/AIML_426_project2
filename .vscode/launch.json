@@ -32,6 +32,14 @@
             ],
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "Python: CCGP Question 3",
+            "type": "python",
+            "request": "launch",
+            "program": "ccgp_q3.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
