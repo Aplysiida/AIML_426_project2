@@ -5,26 +5,37 @@ from deap import tools
 from deap import gp
 
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
+import random
 import operator
 
-def fitness_func(x):
+def problem_func(x):
     return  (1/x) + np.sin(x) if (x > 0) else 2*x + pow(x,2) + 3.0 
 
 """
 Protected division to avoid program crashing when dividing by 0
 """
 def protected_div(x,y):
-    try:
-        return x/y
-    except (ZeroDivisionError, FloatingPointError):
-        return 1.0
+    return 1.0 if(y == 0.0) else x/y
 
-
-def fitness(individual, x_values):
+"""
+Calculate fitness of individual using context vector
+"""
+def fitness(individual, species_index, context_vec, toolbox):
+    context_vec[species_index] = individual #replace individual in context vector with individual
     #compute coopertive fitness
+    return toolbox.calc_err(context_vec)
 
-    return 0.0
+"""
+Calculate MSE between vector of functions [f1(x), f2(x)] and actual function
+"""
+def calc_error(vec, toolbox, x_values, y_values):
+    functions = [toolbox.compile(expr=i) for i in vec]
+    complete_func = lambda x : functions[0](x) if(x > 0.0) else functions[1](x) #complete solution
+    error_values = [pow(y_values[i] - complete_func(x), 2.0) for i,x in enumerate(x_values)]
+    return [np.sum(error_values)/len(error_values)] #return mse
 
 """
 Create function and terminal sets for GP
@@ -47,51 +58,117 @@ def create_primitive_set():
 """
 Setup the DEAP toolbox for GP
 """
-def setup_toolbox(x_values, pset, pop_size):
+def setup_toolbox(x_values, y_values, pset, species_num, pop_size, rng):
     toolbox = base.Toolbox()
 
     #population
-    toolbox.register("expr", gp.genHalfAndHalf, pset=pset, min_=1, max_=4)
+    toolbox.register("expr", gp.genHalfAndHalf, pset=pset, min_=2, max_=6)
     toolbox.register("individual", tools.initIterate, creator.individual, toolbox.expr)
     toolbox.register("species", tools.initRepeat, list, toolbox.individual, pop_size)
-    toolbox.register("context vector", tools.initIterate, list, """Add function that gets random unique indices from species""")
+    toolbox.register("context_vec", tools.initRepeat, list, lambda : rng.integers(low=0, high=pop_size), species_num)
     toolbox.register("compile", gp.compile, pset=pset)
 
+    toolbox.register("calc_err", calc_error, toolbox=toolbox, x_values=x_values, y_values=y_values)
+
     #genetic operators
-    toolbox.register("evaluate",fitness,x_values=x_values)
+    toolbox.register("evaluate",fitness, toolbox=toolbox)
     toolbox.register("mut_expr", gp.genHalfAndHalf, min_=0,max_=1)
     toolbox.register("mutate", gp.mutUniform, expr=toolbox.mut_expr, pset=pset)
     toolbox.register("mate", gp.cxOnePoint)
-    toolbox.register("select", tools.selTournament, tournsize = 5)
+    toolbox.register("select", tools.selTournament, tournsize=4)
 
     #defined to avoid too complicated trees, max height recommended by DEAP documentation
-    max_tree_depth = 3
+    max_tree_depth = 17
     toolbox.decorate("mate", gp.staticLimit(operator.attrgetter('height'), max_value=max_tree_depth))
     toolbox.decorate("mutate", gp.staticLimit(operator.attrgetter('height'), max_value=max_tree_depth))
 
     return toolbox
 
-def run_CCGP(toolbox, crossover_rate, mutation_rate, max_iterations=1000): 
+"""
+Run the CCGP to get best averages across generations and best final GP trees
+"""
+def CCGP_algo(toolbox, crossover_rate, mutation_rate, max_iterations=100): 
     gp_species = [toolbox.species() for _ in range(2)]
+    gp_context_vec = toolbox.context_vec()
     #evaluate species
+    for i,species in enumerate(gp_species):
+        for ind in species:
+            context_vec_trees = [gp_species[j][context_index] for j, context_index in enumerate(gp_context_vec)]
+            ind.fitness.values = toolbox.evaluate(ind, i, context_vec_trees)
 
-    for i in range(max_iterations):
+    best_avgs = []
+    best = None
+
+    iter = 0
+    while (iter < max_iterations):
+    #for iter in range(max_iterations):
         for i,species in enumerate(gp_species):
-            #apply genetic operators
-            offspring = algorithms.varAnd(species, toolbox, crossover_rate, mutation_rate)
-            #evaluate fitness
-            for ind in offspring:
-                ind.fitness.values = toolbox.evaluate([ind])
-            gp_species[i] = toolbox.select(offspring, len(offspring))   #select individuals for next generation
+            #select parents
+            children_pop = toolbox.select(species, k=len(species))
+            #generate children
+            children_pop = algorithms.varAnd(children_pop, toolbox, cxpb=crossover_rate, mutpb=mutation_rate)
+            #recalculate fitness
+            invalid_ind = [ind for ind in children_pop if not ind.fitness.valid]
+            context_vec_trees = [gp_species[j][context_index] for j, context_index in enumerate(gp_context_vec)]
+            fitnesses = toolbox.map(lambda ind : toolbox.evaluate(ind, i, context_vec_trees), invalid_ind)
+            for ind, fit in zip(invalid_ind, fitnesses):
+                ind.fitness.values = fit
+            
+            #select next gen pop
+            gp_species[i] = toolbox.select(species + children_pop, k=len(species))
+
+            #update cv with best individual
+            best_index = sorted(range(len(gp_species[i])), key=lambda j : gp_species[i][j].fitness, reverse=True)[0]
+            gp_context_vec[i] = best_index
+
+        best_num = 5
+        bests = [sorted(species, key=operator.attrgetter("fitness"), reverse=True)[:best_num] for species in gp_species]
+        functions = [toolbox.compile(expr=i) for i in [bests[0][0], bests[1][0]]]
+        best = lambda x : functions[0](x) if(x > 0.0) else functions[1](x)
+
+        best_avg = [toolbox.calc_err([bests[0][i], bests[1][i]]) for i in range(best_num)]
+        best_avg = np.sum(best_avg)/len(best_avg)
+        best_avgs.append(best_avg)
+        iter += 1
+
+    return best, best_avgs, iter
+
+"""
+Run CCGP using various seeds
+"""
+def run_ccgp(seeds, x_values, y_values, crossover_rate=0.95, mutation_rate=0.15):
+
+    #set up CCGP
+    pset = create_primitive_set()
+    creator.create("fitnessmin", base.Fitness, weights=(-1.0,))
+    creator.create("individual", gp.PrimitiveTree, fitness=creator.fitnessmin, pset=pset)
+
+    print('Running CCGP')
+    for seed in seeds:
+        print('Seed = ', seed)
+        rng = np.random.default_rng(seed=seed)
+        random.seed(int(seed))  #define seed
+
+        toolbox = setup_toolbox(x_values=x_values, y_values=y_values, pset=pset, species_num=2, pop_size=200, rng=rng)
+
+        best, best_avgs, iter_num = CCGP_algo(toolbox, crossover_rate=crossover_rate, mutation_rate=mutation_rate)
+        print('final best avg = ',best_avgs[-1])
+        sns.lineplot(x=range(iter_num), y=best_avgs)
+
+        fy_values = [best(x) for x in x_values]
+        sns.scatterplot(x=x_values,y=y_values)
+        sns.scatterplot(x=x_values,y=fy_values)
+        plt.show()
+
+
 
 if __name__ == "__main__":
     #x values for fitness evaluation
     x_num = 30 #number of instances
     x_values = np.linspace(start=-6.0, stop=15.0, num=x_num)
+    x_values = np.concatenate([np.linspace(start=-6.0, stop=0.0, num=x_num), np.linspace(start=0.0, stop=15.0, num=x_num)])
+    y_values = [problem_func(x) for x in x_values]
 
-    pset = create_primitive_set()
-    creator.create("fitnessmin", base.Fitness, weights=(-1.0,))
-    creator.create("individual", gp.PrimitiveTree, fitness=creator.fitnessmin, pset=pset)
+    seeds = np.random.default_rng(seed=5).integers(low=0, high=200, size=5)
 
-    toolbox = setup_toolbox(x_values=x_values, pset=pset, pop_size=5)
-    run_CCGP(toolbox, crossover_rate=0.1, mutation_rate=0.05)
+    run_ccgp(seeds=seeds, x_values=x_values, y_values=y_values)
