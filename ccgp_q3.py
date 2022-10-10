@@ -7,7 +7,7 @@ from deap import gp
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-import pygraphviz as pgv
+#import pygraphviz as pgv
 
 import random
 import operator
@@ -166,10 +166,13 @@ def run_ccgp(seeds, x_values, y_values, crossover_rate=0.95, mutation_rate=0.15)
         best, best_avgs, iter_num = CCGP_algo(toolbox, crossover_rate=crossover_rate, mutation_rate=mutation_rate)
 
         #draw best GP trees
-        name = 'ccgp_best_tree_'+str(seed)+'_1.png'
-        draw_tree_img(seed, best[0], name)
-        name = 'ccgp_best_tree_'+str(seed)+'_2.png'
-        draw_tree_img(seed, best[1], name)
+        #name = 'ccgp_best_tree_'+str(seed)+'_1.png'
+        #draw_tree_img(seed, best[0], name)
+        #name = 'ccgp_best_tree_'+str(seed)+'_2.png'
+        #draw_tree_img(seed, best[1], name)
+
+        #check tree depth
+        print('\tBest program depth f(x > 0) = ',best[0].height,' f(x <= 0) = ',best[1].height)
 
         #draw convergence curve for this run
         fig, _ = plt.subplots(1, 1)
