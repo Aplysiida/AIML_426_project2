@@ -7,7 +7,7 @@ from deap import gp
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-import networkx as nx
+import pygraphviz as pgv
 
 import random
 import operator
@@ -32,7 +32,7 @@ def fitness(individual, species_index, context_vec, toolbox):
 """
 Calculate MSE between vector of functions [f1(x), f2(x)] and actual function
 """
-def calc_error(vec, toolbox, x_values, y_values):
+def calc_err(vec, toolbox, x_values, y_values):
     functions = [toolbox.compile(expr=i) for i in vec]
     complete_func = lambda x : functions[0](x) if(x > 0.0) else functions[1](x) #complete solution
     error_values = [pow(y_values[i] - complete_func(x), 2.0) for i,x in enumerate(x_values)]
@@ -69,7 +69,7 @@ def setup_toolbox(x_values, y_values, pset, species_num, pop_size, rng):
     toolbox.register("context_vec", tools.initRepeat, list, lambda : rng.integers(low=0, high=pop_size), species_num)
     toolbox.register("compile", gp.compile, pset=pset)
 
-    toolbox.register("calc_err", calc_error, toolbox=toolbox, x_values=x_values, y_values=y_values)
+    toolbox.register("calc_err", calc_err, toolbox=toolbox, x_values=x_values, y_values=y_values)
 
     #genetic operators
     toolbox.register("evaluate",fitness, toolbox=toolbox)
@@ -133,6 +133,19 @@ def CCGP_algo(toolbox, crossover_rate, mutation_rate, max_iterations=100):
 
     return best, best_avgs, iter
 
+def draw_tree_img(seed, best, name):
+    nodes, edges, labels = gp.graph(best)
+    g = pgv.AGraph()
+    g.add_nodes_from(nodes)
+    g.add_edges_from(edges)
+    g.layout(prog='dot')
+
+    for n in nodes:
+            node = g.get_node(n)
+            node.attr["label"] = labels[n]
+
+    g.draw(name)
+
 """
 Run CCGP using various seeds
 """
@@ -153,27 +166,31 @@ def run_ccgp(seeds, x_values, y_values, crossover_rate=0.95, mutation_rate=0.15)
         best, best_avgs, iter_num = CCGP_algo(toolbox, crossover_rate=crossover_rate, mutation_rate=mutation_rate)
 
         #draw best GP trees
-        print(type(best))
-        nodes, edges, labels = gp.graph(best[0])
-        g = nx.Graph()
-        g.add_nodes_from(nodes)
-        g.add_edges_from(edges)
-        pos = nx.graphviz_layout(g, prog="dot")
-
-        nx.draw_networkx_nodes(g, pos)
-        nx.draw_networkx_edges(g, pos)
-        nx.draw_networkx_labels(g, pos, labels)
-        plt.show()
+        name = 'ccgp_best_tree_'+str(seed)+'_1.png'
+        draw_tree_img(seed, best[0], name)
+        name = 'ccgp_best_tree_'+str(seed)+'_2.png'
+        draw_tree_img(seed, best[1], name)
 
         #draw convergence curve for this run
+        fig, _ = plt.subplots(1, 1)
+        fig.set_figwidth(20)
+        fig.suptitle('Convergence Curve for seed '+str(seed))
         sns.lineplot(x=range(iter_num), y=best_avgs)
+        fig.savefig('ccgp_curve_'+str(seed)+'.png')
+
         #draw output of best tree vs actual output
         functions = [toolbox.compile(expr=i) for i in [best[0], best[1]]]
         best_func = lambda x : functions[0](x) if(x > 0.0) else functions[1](x)
+
+        print('\tBest fitness = ',toolbox.calc_err(best))
+
         fy_values = [best_func(x) for x in x_values]
+        fig, _ = plt.subplots(1, 1)
+        fig.set_figwidth(20)
+        fig.suptitle('Points Comparison for seed '+str(seed))
         sns.scatterplot(x=x_values,y=y_values)
         sns.scatterplot(x=x_values,y=fy_values)
-        plt.show()
+        fig.savefig('ccgp_chart_'+str(seed)+'.png')
 
 if __name__ == "__main__":
     #x values for fitness evaluation
