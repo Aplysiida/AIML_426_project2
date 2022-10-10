@@ -199,5 +199,5 @@ if __name__ == "__main__":
     x_values = np.concatenate([np.linspace(start=-6.0, stop=0.0, num=x_num), np.linspace(start=0.0, stop=15.0, num=x_num)])
     y_values = [problem_func(x) for x in x_values]
 
-    seeds = np.random.default_rng(seed=5).integers(low=0, high=200, size=5)
+    seeds = np.random.default_rng(seed=3).integers(low=0, high=200, size=5)
     run_ccgp(seeds=seeds, x_values=x_values, y_values=y_values)
