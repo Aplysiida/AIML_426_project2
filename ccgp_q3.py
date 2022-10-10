@@ -7,6 +7,7 @@ from deap import gp
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import networkx as nx
 
 import random
 import operator
@@ -123,8 +124,7 @@ def CCGP_algo(toolbox, crossover_rate, mutation_rate, max_iterations=100):
 
         best_num = 5
         bests = [sorted(species, key=operator.attrgetter("fitness"), reverse=True)[:best_num] for species in gp_species]
-        functions = [toolbox.compile(expr=i) for i in [bests[0][0], bests[1][0]]]
-        best = lambda x : functions[0](x) if(x > 0.0) else functions[1](x)
+        best = [bests[0][0], bests[1][0]]   #get the best trees from each species
 
         best_avg = [toolbox.calc_err([bests[0][i], bests[1][i]]) for i in range(best_num)]
         best_avg = np.sum(best_avg)/len(best_avg)
@@ -149,18 +149,31 @@ def run_ccgp(seeds, x_values, y_values, crossover_rate=0.95, mutation_rate=0.15)
         rng = np.random.default_rng(seed=seed)
         random.seed(int(seed))  #define seed
 
-        toolbox = setup_toolbox(x_values=x_values, y_values=y_values, pset=pset, species_num=2, pop_size=200, rng=rng)
-
+        toolbox = setup_toolbox(x_values=x_values, y_values=y_values, pset=pset, species_num=2, pop_size=20, rng=rng)
         best, best_avgs, iter_num = CCGP_algo(toolbox, crossover_rate=crossover_rate, mutation_rate=mutation_rate)
-        print('final best avg = ',best_avgs[-1])
-        sns.lineplot(x=range(iter_num), y=best_avgs)
 
-        fy_values = [best(x) for x in x_values]
+        #draw best GP trees
+        print(type(best))
+        nodes, edges, labels = gp.graph(best[0])
+        g = nx.Graph()
+        g.add_nodes_from(nodes)
+        g.add_edges_from(edges)
+        pos = nx.graphviz_layout(g, prog="dot")
+
+        nx.draw_networkx_nodes(g, pos)
+        nx.draw_networkx_edges(g, pos)
+        nx.draw_networkx_labels(g, pos, labels)
+        plt.show()
+
+        #draw convergence curve for this run
+        sns.lineplot(x=range(iter_num), y=best_avgs)
+        #draw output of best tree vs actual output
+        functions = [toolbox.compile(expr=i) for i in [best[0], best[1]]]
+        best_func = lambda x : functions[0](x) if(x > 0.0) else functions[1](x)
+        fy_values = [best_func(x) for x in x_values]
         sns.scatterplot(x=x_values,y=y_values)
         sns.scatterplot(x=x_values,y=fy_values)
         plt.show()
-
-
 
 if __name__ == "__main__":
     #x values for fitness evaluation
@@ -170,5 +183,4 @@ if __name__ == "__main__":
     y_values = [problem_func(x) for x in x_values]
 
     seeds = np.random.default_rng(seed=5).integers(low=0, high=200, size=5)
-
     run_ccgp(seeds=seeds, x_values=x_values, y_values=y_values)
