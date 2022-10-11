@@ -336,14 +336,29 @@ The average fitness of the best is calculated by using the best individuals in t
 \section*{Part 4: Genetic Programming for Image Classification}
 \subsection*{Classifier Design and Evaluation}
 \subsection*{Classifier Results and Discussion}
+\clearpage
 \begin{center}
 	\begin{tabular}{|c|c|c|}
 		\hline
-		Dataset & Accuracy(\%) & Training Time(seconds) \\
+		\multicolumn{3}{|c|}{FEI\_1} \\
 		\hline
-		FEI\_1 & 100.0 & 0.00280 \\
+		Classifier & Accuracy(\%) & Training Time(seconds) \\
 		\hline
-		FEI\_2 & 0.0 & 0.0 \\
+		Decision Trees & 50.0 & 0.0266 \\
+		\hline
+		Naive Bayes & 98.0 & 0.0172 \\
+		\hline
+		KNN & 50.0 & 0.0168 \\		
+		\hline
+		\multicolumn{3}{|c|}{FEI\_2} \\
+		\hline
+		Classifier & Accuracy(\%) & Training Time(seconds) \\
+		\hline
+		Decision Trees & 88.0 & 0.0222 \\
+		\hline
+		Naive Bayes & 96.0 & 0.0390 \\
+		\hline
+		KNN & 72.0 & 0.0117 \\		
 		\hline
 	\end{tabular}
 \end{center}

@@ -1,0 +1,49 @@
+KNN Classifier
+For dataset F1
+        F1 Shape =  (150, 129)
+        Execution Time =  0.005002260208129883 s
+        Accuracy =  0.5
+For dataset F2
+        F2 Shape =  (150, 129)
+        Execution Time =  0.01640772819519043 s
+        Accuracy =  0.72
+
+Random Forest Classifier
+For dataset F1
+        F1 Shape =  (150, 129)
+        Execution Time =  0.24728178977966309 s
+        Accuracy =  0.94
+For dataset F2
+        F2 Shape =  (150, 129)
+        Execution Time =  0.2251884937286377 s
+        Accuracy =  0.94
+
+GaussianNB
+For dataset F1
+        F1 Shape =  (150, 129)
+        Execution Time =  0.01527857780456543 s
+        Accuracy =  0.98
+For dataset F2
+        F2 Shape =  (150, 129)
+        Execution Time =  0.0338592529296875 s
+        Accuracy =  0.96
+
+Decision Tree Classifier
+For dataset F1
+        F1 Shape =  (150, 129)
+        Execution Time =  0.010980367660522461 s
+        Accuracy =  0.5
+For dataset F2
+        F2 Shape =  (150, 129)
+        Execution Time =  0.023041248321533203 s
+        Accuracy =  0.72
+
+Gradient Boosting Classifier
+For dataset F1
+        F1 Shape =  (150, 129)
+        Execution Time =  0.3462984561920166 s
+        Accuracy =  0.5
+For dataset F2
+        F2 Shape =  (150, 129)
+        Execution Time =  1.0759775638580322 s
+        Accuracy =  0.88

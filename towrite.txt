@@ -58,5 +58,32 @@ Conclusion:
 		Ways to improve
 	What makes PBIL unique for this problem compared to other algorithms
 
-Question 3:
+Part 4 
 
+FLGP Best GP Tree: 
+
+FEI_1 
+
+Structure of GP Tree 
+
+Chart of GP Tree 
+
+Number of Branches and Tree Depth 
+
+Global and Local Features used 
+
+Why these features help achieve good accuracy in classifier 
+
+FEI_2 
+
+Classifier Design and Evaluation: 
+
+For testing the performance of the FLGP algorithm, a classifier was trained on the feature vector data generated through applying the FLGP best GP tree program to all instances in the dataset. This is done separately for the FEI_1 and FEI_2 datasets. Since the classifier is only being used to test the performance, performance of the classifier itself does not matter, but execution time can matter for such a classifier to be able to quickly evaluate the performance of the FLGP output. Thus, KNN is chosen for the classifier to use. The metrics being measured from the classifier are time taken to train the model and the accuracy of the predicted classes using the test dataset. This will show if the FLGP output can generate a good quality feature vectors that models can use. 
+
+Classifier Results Discussion: 
+
+FEI_1 achieves perfect accuracy with very quick training time. The low training time is caused by the dataset being small with only 150 instances with 129 features. The ratio between the number of instances and the number of features can lead to overfitting in the dataset so to improve the generalization of the classifier, fewer features might need to be used. But since the performance on the test dataset is very good, generalization seems to be good enough. 
+
+FEI_2 achieves 
+
+Conclusion: 
