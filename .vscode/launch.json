@@ -8,7 +8,7 @@
             "name": "Python: EP Question 1",
             "type": "python",
             "request": "launch",
-            "program": "ep_q1.py",
+            "program": "part1/ep_q1.py",
             "console": "integratedTerminal",
             "justMyCode": true
         },
@@ -16,7 +16,7 @@
             "name": "Python: DE Question 1",
             "type": "python",
             "request": "launch",
-            "program": "de_q1.py",
+            "program": "part1/de_q1.py",
             "console": "integratedTerminal",
             "justMyCode": true
         },
@@ -24,11 +24,11 @@
             "name": "Python: EDA Question 2",
             "type": "python",
             "request": "launch",
-            "program": "eda_q2.py",
+            "program": "part2/eda_q2.py",
             "args": [
-                "data/knapsack-data/10_269",
-                "data/knapsack-data/23_10000",
-                "data/knapsack-data/100_995"
+                "part2/data/knapsack-data/10_269",
+                "part2/data/knapsack-data/23_10000",
+                "part2/data/knapsack-data/100_995"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
@@ -37,7 +37,38 @@
             "name": "Python: CCGP Question 3",
             "type": "python",
             "request": "launch",
-            "program": "ccgp_q3.py",
+            "program": "part3/ccgp_q3.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: FLGP Question 4aaaaaa",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/part4/IDGP/",
+            "program": "IDGP_main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: FLGP Question 4.1",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/part4/IDGP/",
+            "program": "flgp_q4.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: FLGP Question 4.2",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/part4/IDGP/",
+            "program": "classifier_q4.py",
+            "args": [
+                "data/f1",
+                "data/f2"
+            ],
             "console": "integratedTerminal",
             "justMyCode": true
         }
