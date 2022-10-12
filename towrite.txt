@@ -1,89 +1,40 @@
-Question 1:
-Choice of EP and DE/ES:
-
-Goal is to find minimum values of two continuous functions. Solution will be set X where x_i is a parameter for the function, range of x is [-30,30]. Will solve problem for D=20 so len(X) = 20.
-Use combination of Fast-EP and Improved-EP 
-
-ES:
-(1+1)-ES
-(chi+1)-ES
-(chi+lambda)-ES
-(chi, lambda)-ES)
-Self-adaptive ES
-CMA-ES
-CMSA-ES
-Natural ES
-
-DE:
-(not yet learnt)
-
-Question 2:
-Individual representation:
-EDAs originally used to solve combinatorial/binary optimization problems. So the representation of the solution is recommended to be a binary vector. Thus for the knapsack problem to be a binary optimization problem, use a bit vector to represent a solution. Length of the bit vector is equal to total number of possible items to select where for each bit 1 means select the item while 0 means ignore the item.
-
-Fitness Function:
-The goal for the problem is to optimizatize the combination of selected items to have the maximum total value while satisfying the weight constraint. The fitness function is used for selection and weighted computation in the UMDA algorithm and for sorting the generated individuals in the population in the PBIL algorithm. The fitness function is defined to be $insert function here$ with the alpha implemented to heavily discourage constraint violating solutions.
-
-EDA algorithm:
-UMDA with a too high alpha value will converge before reaching the best solution while UMDA with a too low alpha value will take a very large number of generations before reaching the optimal solution. For the PBIL algorithm, more control can be added through being able to select the best and worst solutions to affect the probability vector. So the PBIL algorithm is used for this problem.
-
-EDA design/ Outline of PBIL algorithm:
-Talk about if chose to use mutation function for probability
-What stopping criteria is used
-How a new knapsack solution is generated
-How probability vector evolves
-
-EDA parameters:
-Parameters to talk about:
-pop size
-learning rate
-mutation rate
-mutation shift
-Number of best individuals
-Number of worst individuals
-
-Discussion:
-Result from each dataset:
-	Mean and standard deviation
-	How is average of best individuals calculated
-	Does it reach optimal value
-	How long does it take to reach best solution
-	Chart: convergence curve
-	Shape of convergence curve
-
-Conclusion:
-	Does PBIL work well for this problem?
-	If so why did it work well
-	If not why didn't it work well
-		Ways to improve
-	What makes PBIL unique for this problem compared to other algorithms
-
 Part 4 
 
 FLGP Best GP Tree: 
 
 FEI_1 
 
-Structure of GP Tree 
+The best tree for FEI_1 is small with a depth of only 2 and involves applying a local scale-invariant feature transform (SIFT) onto a rectangular region on the image. The tree does not branch off into multiple branches and uses only one part of the image as shown with the leaves for the rectangular region primitive. 
 
-Chart of GP Tree 
+Chart of tree 
 
-Number of Branches and Tree Depth 
+Image of selected region 
 
-Global and Local Features used 
-
-Why these features help achieve good accuracy in classifier 
+The FLGP program ignores expected features that you would use to identify the expression such as mouth and eyes. Instead focusing on part of the right eyebrow and temple of the head. These regions do not have any visible differences between the neutral expression and smile expression. Local SIFT defines features using difference of Gaussian, an approximation of Laplacian of Gaussian which is used to detect regions that differ in value. These regions are likely the lighter value region of the temple and the darker value region of the eyebrow. So, SIFT could be determining the expression through the overall position and rotation of the head determined by the temple and eyebrow region where smiling could lead to the person facing the camera in a slightly different, but notable angle. 
 
 FEI_2 
 
+The FLGP tree for FEI_2 is larger than the tree generated for FEI_1, with a depth of 4 and, excluding the leaf nodes, 5 branches. The tree considers both local and global features, for the global features the histogram of oriented gradients(HOG), differential item functioning(DIF) and SIFT are used. These descriptors use the gradients in the image to determine features has areas in the image with abrupt changes. While for the local features the SIFT and local binary patterns(LBP) are used. LBP's feature vectors are histograms of each of the cells/regions in the image counting the frequency of pixels with a greater value than the central pixel of the cell. Thus LBP are to describe information about the pixels' neighbours. 
+
+Chart of GP Tree 
+
+Image of selected region 
+
+What is interesting is that this FLGP considers a similar local region that the FEI_1 FLGP looks at (green box). Another local region is used which looks at the right ear and cheekbone of the face (red box). This indicates that FEI_2 is following a similar approach to FEI_1 of considering the orientation of the head important for determining the expression of the face through the local regions. Unlike FEI_1, this FLGP uses more feature extraction functions to extract more data from the face and since FEI_2 uses global features as well, the FLGP tree also considers the other parts of the face the FEI_1's FLGP does not consider.
+
 Classifier Design and Evaluation: 
 
-For testing the performance of the FLGP algorithm, a classifier was trained on the feature vector data generated through applying the FLGP best GP tree program to all instances in the dataset. This is done separately for the FEI_1 and FEI_2 datasets. Since the classifier is only being used to test the performance, performance of the classifier itself does not matter, but execution time can matter for such a classifier to be able to quickly evaluate the performance of the FLGP output. Thus, KNN is chosen for the classifier to use. The metrics being measured from the classifier are time taken to train the model and the accuracy of the predicted classes using the test dataset. This will show if the FLGP output can generate a good quality feature vectors that models can use. 
+For testing the performance of the FLGP algorithm, some classifiers were trained and tested on the feature vector data generated from the FLGP best program being applied to instances in the datasets. This is done separately for the FEI_1 and FEI_2 datasets. Since the classifiers are only being used to test the performance, performance of the classifier itself does not matter, but execution time can matter for measuring if FLGP can be used to help classify data quickly. 
+
+The classifiers chosen were Decision Trees, Naïve Bayes and K Nearest Neighbours (KNN). These were chosen to explore classifiers that excel at different issues e.g., discrete vs continuous, assumption of independence, etc. The metrics measured are the accuracy of the classifier based on the separate test dataset and the time taken to train the classifier through the training dataset. These metrics will showcase if the FLGP output can generate a good quality dataset that classifiers can use effectively. 
 
 Classifier Results Discussion: 
 
-FEI_1 achieves perfect accuracy with very quick training time. The low training time is caused by the dataset being small with only 150 instances with 129 features. The ratio between the number of instances and the number of features can lead to overfitting in the dataset so to improve the generalization of the classifier, fewer features might need to be used. But since the performance on the test dataset is very good, generalization seems to be good enough. 
+FEI_1 achieves bad performance for decision trees and KNN but achieves good performance for naïve Bayes. For the training time, KNN was the fastest and decision trees were the slowest, being 1.58 times slower than KNN. The fast-training times is caused by the dataset being small with only 150 instances with 129 features. Achieving a good performance on naïve Bayes indicates that the assumption of the features being independent is correct. The reason why KNN and decision trees had bad performance in FEI_1 could be because of the large number of features present in the feature vectors. The number of features present being almost equal to the number of instances, which can lead to overfitting to the training data and thus classifier models will struggle with generalizing. 
 
-FEI_2 achieves 
+FEI_2 achieves better performance compared to FEI_1 overall. Once again naïve Bayes achieves the best performance but is 0.02/% worse than FEI_1’s naïve Bayes. Both decision trees and KNN achieve better performance compared to FEI_1 with decision trees having the biggest improvement of 38/%. This improvement is interesting because the number of features present in the feature vectors have increased from 129 to 570 while still maintaining the same number of instances. Suggesting that overfitting is not much of an issue as initially thought. Reasons why there is a greater improvement could be that the FLGP for FEI_2 is able to identify more useful features to be used by the classifier. For the training time naïve Bayes is 2.3 times slower compared to FEI_1 naïve Bayes, while decision trees and KNN achieve small reductions in training time. This shows that the increase of dimensions to handle by the classifier does not limit training time performance, though the effect the number of dimensions present in the feature vectors can become noticeable in larger datasets with more instances. 
 
 Conclusion: 
+It was expected that the FLGP's local regions would be at facial features that people would use to determine expressions. So local regions around the mouth, eyes and eyebrows were expected. The actual local regions used were the rightmost side of the face, while this contained part of an eyebrow, no other expected features were used for the local regions. The reasons why FLGP did not choose the mouth and eyes could be that there was too much variation between smiles from different people at those features, e.g., showing or not showing teeth, mouth shape, eye shape, position of eyes and mouth in image, etc. There is still variation in different people in the local regions selected through the hairline covering some parts of the image and the overall shape and size of peoples' heads, but the variation must be small enough to the FLGP for this region to be a reliable source of information.
+
+It is noted that naive Bayes exceeded the other two classifiers in accuracy performance for both FEI_1 and FEI_2. The reason why this classifier is successful could be from the number of dimensions that needs to be handled and naive bayes can better handle large dimensionality. To improve the performance of these classifiers, decreasing the number of features in the feature vectors through dimension reduction and feature selection techniques could be done. 
