@@ -45,10 +45,9 @@ if __name__ == "__main__":
     f1_train_data, f1_train_labels, f1_test_data, f1_test_labels = read_datasets(folder_paths[0])
     print('F1 Shape = ', f1_train_data.shape)
     evaluate_data(train_data=f1_train_data, train_labels=f1_train_labels, test_data=f1_test_data, test_labels=f1_test_labels)
-    #train_test_classifier(train_data=f1_train_data, train_labels=f1_train_labels, test_data=f1_test_data, test_labels=f1_test_labels)
+    
     #f2
     print('For dataset F2')
     f2_train_data, f2_train_labels, f2_test_data, f2_test_labels = read_datasets(folder_paths[1])
-    print('F2 Shape = ', f1_train_data.shape)
+    print('F2 Shape = ', f2_train_data.shape)
     evaluate_data(train_data=f2_train_data, train_labels=f2_train_labels, test_data=f2_test_data, test_labels=f2_test_labels)
-    #train_test_classifier(train_data=f2_train_data, train_labels=f2_train_labels, test_data=f2_test_data, test_labels=f2_test_labels)
