@@ -4,6 +4,7 @@
 \usepackage{algpseudocode}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{amsfonts} 
 
 \title{AIML426 Project 2 Report}
 \date{}
@@ -32,7 +33,7 @@ The hyperparameters used by the EP algorithm are variance range, variance thresh
 The hyperparameters to decide for DE are the scaling factor and crossover rate. The scaling factor defines how much the mutation vector will mutate and the crossover rate states the probability of a feature in the individual will be swapped with the mutated result. Increasing either of these rates will increase the exploration done by DE. \par
 \noindent Since DE has high exploration, setting both the scaling factor and crossover rate to low values is recommended to prevent DE from never reaching an optimum within a reasonable number of iterations. It was found through testing various values for the hyperparameters that setting the crossover rate and the scaling factor to 0.1 gives good results for both functions. \par
 \noindent t was found that the DE never converges when maximum number of iterations is set to 1000. Increasing the population to more than 50 individuals did not greatly improve the performance but increasing the maximum number of iterations did, thus the maximum number of iterations was set to 3000. While the DE algorithm still does not converge, it was determined that the number of iterations was a good balance between finding the optimal value and the time taken to calculate. \par
-\subsection*{Results}
+\subsection*{Results and Discussion}
 \subsubsection*{Evolutionary Programming}
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
@@ -47,7 +48,6 @@ The hyperparameters to decide for DE are the scaling factor and crossover rate. 
 		\hline
 	\end{tabular}
 \end{center}
-
 \subsubsection*{Differential Evolution}
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
@@ -62,6 +62,15 @@ The hyperparameters to decide for DE are the scaling factor and crossover rate. 
 		\hline
 	\end{tabular}
 \end{center}
+
+When comparing EP and DE, it is noted that DE achieves a much better performance for fitness average for all problems. Where Griewanks is x18 smaller, Rosenbrocks D=20 is x110 smaller and Rosenbrocks D=50 is x56 smaller. This can be because DE has a greater value set for the maximum number of iterations. Thus, DE is able to be closer to convergence compared to EP. \par
+
+\noindent The reason why DE has a greater maximum number of iterations than EP is because EP takes longer to calculate. The average time taken for EP to calculate one generation was 0.0163 seconds, while for DE it was 0.00328 seconds, roughly x10 quicker than EP. Meaning that DE can complete more iterations in a shorter amount of time. The reason why DE is quicker is because EP uses expensive functions such as Numpy’s exponent function, the implementation is also not optimized as well leading to redundant multiple uses of these expensive functions. DE only uses multiplication and addition operators and thus avoids using expensive functions in each generation.\par 
+
+\noindent For the Rosenbrocks problems, the standard deviation measured for both algorithms was very high, being even bigger than the average calculated. These values for standard deviation, combined with the observation that all problems’ average number of iterations are the maximum number of iterations, indicates that both algorithms have not reached convergence. Which means they were still at a point where exploration is focused more than exploitation. \par
+\noindent For the Griewank problem the standard deviation is smaller than the average calculated. Which indicates that this problem was closer to convergence compared to the others. This is because the problem has a smaller solution space to explore compared to the other two problems. For the Rosenbrock functions reaching the global minimum is difficult because the difference between the global minimum and its surrounding values is small. Thus the algorithm can easily miss it and avoid converging properly. \par
+\subsection*{Conclusion}
+More iterations are needed to reach the true optimal output for these algorithms from reaching convergence. This is easier to achieve with DE due to its quicker execution time per generation compared to EP. The better performance of DE can be the result of DE being originally designed for optimizing continuous problems, while EP were first designed for evolving finite state machines and was modified to work with continuous problems. This has led to using expensive calculations that become very time-consuming when added up through the generations.
 
 \section*{Part 2: Estimation of Distribution Algorithm}
 \subsection*{EDA Design}
@@ -166,6 +175,9 @@ The average fitness of the best is calculated by using the best individuals in t
 	\caption{Convergence Curve}
 \end{figure}
 
+All five seeds have reached the same optimal value of 295. All seeds reach convergence well before the maximum number of iterations showcasing that PBIL quickly finds the optimal solution before satisfying the convergence stopping criteria. \par
+\noindent All the curves rise rapidly from very low fitness to the optimal fitness value. Seeds 1429 and 1667 do explore the solution space a bit with some generations achieving lower accuracy compared to its previous generation. 1667 even goes beyond the optimal value, indicating it explored solutions that violate the weight constraint, before decreasing to optimal fitness. This shows that PBIL can avoid getting caught in solutions that might seem ideal but violate the weight constraint. \par
+
 \subsection*{23\_10000 Dataset}
 \begin{center}
 	\begin{tabular}{|c|c|}
@@ -200,6 +212,10 @@ The average fitness of the best is calculated by using the best individuals in t
 	\includegraphics[width=\linewidth]{knapsack_23_10000.png}
 	\caption{Convergence Curve}
 \end{figure}
+
+All seeds except for one reach the optimal fitness, but even the suboptimal solution was close to the optimal fitness. All seeds converge much earlier than at the maximum number of iterations, including the suboptimal value, which indicates the suboptimal solution got caught in a local maximum. To avoid such situations from occurring, more exploration should be implemented through tuning the hyperparameters by increasing the mutation rate and shift, increasing the range of possible probability values or through increasing the number of best and worst individuals to influence the probability vector. \par
+
+\noindent For all seeds, there was a lot of exploration in the early generations where the average fitness of the best individuals varied a lot for each generation. The extreme fitness changes found in the very beginning can be caused by the probability vector being initialized as a sequence of 0.5. The population generated from this probability vector were not aware of the weight constraints and lots of individuals, while having a high value, violated the weight constraint. Over time this exploration decreased and PBIL focused more on exploitation as the difference between each generation decreased over time until PBIL reaches convergence and stops. \par
 
 \subsection*{100\_995 Dataset}
 \begin{center}
@@ -236,12 +252,35 @@ The average fitness of the best is calculated by using the best individuals in t
 	\caption{Convergence Curve}
 \end{figure}
 
+None of the seeds reached optimal fitness with the mean being smaller than the optimal value of 1514. The standard deviation being high and the low number of iterations shows that all solutions reached convergence from within a local optimum instead of reaching the maximum number of iterations. \par
+
+\noindent The shape of the convergence curves supports this observation of premature convergence since the curve is very smooth, which shows that the PBIL does very little exploration and focuses too much on exploitation. More exploration will have produced a less smooth curve as the model explores solutions that do not always improve on the previous solution. There is evidence in the curve shape that exploration happens since there are bumps of slightly worse fitness in the curve. \par
+
 \subsection*{Conclusion}
+PBIL works well for the first two datasets where it converges to the optimal solution in less than 100 iterations. These datasets were also where hyperparameters tuned for preference for  exploitation over exploration works well. \par 
+
+\noindent For the third dataset PBIL struggles with finding solutions that do not violate the weight constraint despite setting the penalty coefficient to a very high value. This is because of the nature of the probability vector and how the solutions in each generation can continue violating the weight constraint because they are generated based on the probability vector and you can get “unlucky” with the probabilities. This could be avoided by increasing the range of possible values for the probabilities to allow probabilities to be 1.0 and 0.0, but this can lead to getting caught in local optima such as what happened in this implementation. One possible way to avoid generating solutions that are heavier than the weight constraint is by only selecting individuals that do not violate the weight constraint for the best individuals for the population. This can lead to issues with exploration through ignoring solutions that only slightly violate the weight constraint but provide a very big value increase. \par
+
+\noindent Another issue with using PBIL is that there are a lot of hyperparameters to tune to suit the problem. Tuning these parameters for the third dataset was very time consuming due to the large solution space PBIL explores, which means finding the global optimal value would require a lot of generations before reaching convergence. While there likely is a combination of values for the hyperparameters that does allow the PBIL to find the optimal value before reaching the maximum number of iterations, testing to find this combination is very time consuming to do. \par
 
 \section*{Part 3: Cooperative Co-evolution Genetic Programming}
 \subsection*{CCGP Design}
 \subsubsection*{Function and Terminal Sets}
+The CCGP tree program needs to be able to produce all values within the $\mathbb{R}$ domain. The functions used by the program are the arithmetic and trigonometric functions. The arithmetic functions are addition, negation, multiplication and protected division. Protected division is used to prevent errors from occurring when dividing by 0. The trigonometric functions sin and cos are used since $f_1(x)$ uses the sin function and a more accurate representation of this function can be achieved through using cos and sin directly instead of evaluating only using arithmetic.  \par
 \subsubsection*{Fitness Function and Evaluation}
+The complete solution is the combination of the $ f_1(x) $ species and $f_2(x)$ species. The individuals from these species are combined by: 
+\begin{algorithm}
+	\caption{PBIL Probability Mutation}
+	\begin{algorithmic}
+		\If{$x > 0.0$}
+			\State{$f_1(x)$}
+		\Else
+			\State{$f_2(x)$}
+		\EndIf
+	\end{algorithmic}
+\end{algorithm}
+The fitness function used to evaluate the fitness between the complete solution and the problem function $f(x)$ is MSE. It is used by defining a range of points to test on and calculating the MSE between the output of the points through the complete solution function and output of the x points in $f(x)$. Defined for this problem are 30 points with equal spacing in-between, all defined in the range $[-6.0, 15.0]$. The reason why there are more values in $x \ge 0$ than in $x < 0$ is to avoid the values generated by $f(x \ge 0)$ being too small compared to $f(x < 0)$ such that the complete solution can ignore the variation generated by $sin(x)$. \par
+\noindent MSE is chosen over RMSE since the RMSE requires an extra square root calculation which can be time consuming and CCGP only cares about minimizing the different which is already easily through MSE. \par
 \subsubsection*{CCGP Parameters}
 \subsection*{Results and Discussion}
 
