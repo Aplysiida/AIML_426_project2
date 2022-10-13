@@ -42,15 +42,6 @@
             "justMyCode": true
         },
         {
-            "name": "Python: FLGP Question 4aaaaaa",
-            "type": "python",
-            "request": "launch",
-            "cwd": "${workspaceFolder}/part4/IDGP/",
-            "program": "IDGP_main.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
             "name": "Python: FLGP Question 4.1",
             "type": "python",
             "request": "launch",
@@ -69,6 +60,28 @@
                 "data/f1",
                 "data/f2"
             ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: ZOO-RL Question 5",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/part5/",
+            "program": "run_rl.py",
+            "args": [
+                "--config","${workspaceFolder}/part5/config/cartpole_es_openai.yaml",
+                "--log"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: ZOO-RL Question 5aaa",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/part5/",
+            "program": "eval_rl.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }

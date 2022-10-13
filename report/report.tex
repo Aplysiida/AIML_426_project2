@@ -12,8 +12,26 @@
 	\maketitle
 	
 \section*{Part 1: Evolutionary Programming and Differential Evolution Algorithms}
+\subsubsection*{Individual Representation}
+An individual solution is represented as a sequence of D float values that are used for the variables to be applied to the function used for the fitness function. Each element in the sequence is associated with one variable to be used. D represents the number of variables used by the fitness function. \par
+\subsubsection*{Fitness Function}
+The fitness function is the value produced by the function with the variable values stored in the individual. The function used is either Rosenbrock or Griewanks. The smaller the output of the function is, the greater the fitness becomes. \par
+\subsubsection*{Stopping Criteria}
+For the stopping criteria, a combination of checking for convergence and checking if reached the maximum number of iterations is used. For checking for convergence, the average fitness of the best individuals in the final population is calculated, if the average fitness does not change for 20 iterations, then it is assumed that convergence has been achieved and the stopping criteria is satisfied. This is done to prevent the algorithm from running unnecessary iterations where no change in the population is expected. \par
+
+\noindent The designs implemented for the above three aspects are applied to both algorithms since they use the same representation, are solving the same problem, and no extra encoding is needed to allow the algorithms to use the solution. \par
 \subsection*{EP Design}
+The algorithm used for EP is a combination of Fast-EP and Improved-EP. Fast-EP is used to encourage exploration by using the Cauchy distribution which is fat-tailed and thus can produce more variable mutations. This additional exploration is especially useful for Griewanks’ function where there are many local optima that the EP algorithm can get stuck in if there is not enough exploration. Improved-EP uses self-adaptive mutation that adapts the randomness on the current fitness, thus the c hyperparameter needed for the meta-EP can be removed and each feature in the solution can be tuned independently, allowing for more exploration to be done for each feature. \par
+\noindent The tournament selector is used for selecting the individuals for the next generation which encourages exploration when compared to greedy selection which is more focused on exploitation.  \par
+\subsubsection*{EP Parameters}
+The hyperparameters used by the EP algorithm are variance range, variance threshold, population size and maximum number of iterations. Through exploring the performance of various values for variance range and threshold. It was found that setting the variance range to $\frac{(x_{max} – x_{min})}{10.0}$ and variance threshold to $\frac{variance\_range}{10.0}$ delivers good results for both functions. \par
+\noindent The variance range sets the initial range of values for variation/mutation, to decrease the chance that the values generated for the solution go beyond the range constraint for x values of $[-30,30]$ the value range is divided by 10.0 and the threshold divides by 10 again to prevent exploration into solutions that contain values beyond $[-30,30]$.  \par
+\noindent The population size is set to 50 and the maximum number of iterations is set to 2000 as a balance for finding the most optimal result and the time taking to determine this solution. \par
 \subsection*{DE Design}
+\subsubsection*{DE Parameters}
+The hyperparameters to decide for DE are the scaling factor and crossover rate. The scaling factor defines how much the mutation vector will mutate and the crossover rate states the probability of a feature in the individual will be swapped with the mutated result. Increasing either of these rates will increase the exploration done by DE. \par
+\noindent Since DE has high exploration, setting both the scaling factor and crossover rate to low values is recommended to prevent DE from never reaching an optimum within a reasonable number of iterations. It was found through testing various values for the hyperparameters that setting the crossover rate and the scaling factor to 0.1 gives good results for both functions. \par
+\noindent t was found that the DE never converges when maximum number of iterations is set to 1000. Increasing the population to more than 50 individuals did not greatly improve the performance but increasing the maximum number of iterations did, thus the maximum number of iterations was set to 3000. While the DE algorithm still does not converge, it was determined that the number of iterations was a good balance between finding the optimal value and the time taken to calculate. \par
 \subsection*{Results}
 \subsubsection*{Evolutionary Programming}
 \begin{center}
