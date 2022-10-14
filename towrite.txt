@@ -38,3 +38,15 @@ Conclusion:
 It was expected that the FLGP's local regions would be at facial features that people would use to determine expressions. So local regions around the mouth, eyes and eyebrows were expected. The actual local regions used were the rightmost side of the face, while this contained part of an eyebrow, no other expected features were used for the local regions. The reasons why FLGP did not choose the mouth and eyes could be that there was too much variation between smiles from different people at those features, e.g., showing or not showing teeth, mouth shape, eye shape, position of eyes and mouth in image, etc. There is still variation in different people in the local regions selected through the hairline covering some parts of the image and the overall shape and size of peoples' heads, but the variation must be small enough to the FLGP for this region to be a reliable source of information.
 
 It is noted that naive Bayes exceeded the other two classifiers in accuracy performance for both FEI_1 and FEI_2. The reason why this classifier is successful could be from the number of dimensions that needs to be handled and naive bayes can better handle large dimensionality. To improve the performance of these classifiers, decreasing the number of features in the feature vectors through dimension reduction and feature selection techniques could be done. 
+
+Part 5
+Parameters of OpenAI-ES
+learning rate = Controls the amount of exploration done for each step in OpenAI-ES model by controlling the step size. The step size is used to control how much the weights are updated in each generation through ES.
+noise standard deviation = controls range of random valus used for random vector in ES to update individuals in population. 
+population size = Number of individuals used by ES
+generation number = Number of generations to run through ES
+
+Getting performance of OpenAI-ES
+Get: 
+generation number, performance of policy neural network at generation
+1 row = 1 generation
