@@ -13,7 +13,7 @@ def set_seed(seed):
 
 
 def main():
-    which_log = 'logs/CartPole-v1'
+    which_log = 'logs/CartPole-v1/'
     save_model_freq = 20
     generation_num = 5000
 
