@@ -1,6 +1,6 @@
 env:
-  name: CartPole-v1
   seed: 0
+  name: CartPole-v1
   step_max: 500
   pomdp: False
 policy:

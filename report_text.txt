@@ -209,4 +209,11 @@ A state in this problem is represented through four variables: cart position $x$
 
 The action space for this problem is composed of two actions: push the cart to the left and push the cart to the right. This pushing applies a fixed force to the cart and changes the cart’s velocity and through the cart’s velocity, changes the pole’s angular force. 
 
-The criteria of successful learning for this problem is maximizing the number of timesteps taken by an episode while avoiding exceeding the range values defined for cart position and pole angle. The total reward value is initialized at 0 at the initial stage of the episode. For each successful time step where no termination criteria were satisfied, the total reward value is incremented by 1.  
+The criteria of successful learning for this problem is maximizing the number of timesteps taken by an episode while avoiding exceeding the range values defined for cart position and pole angle. The total reward value is initialized at 0 at the initial stage of the episode. For each successful time step where no termination criteria were satisfied, the total reward value is incremented by 1.
+
+Parameters of OpenAI-ES
+There are four hyperparameters used by OpenAI-ES: learning rate, noise standard deviation, population size and number of generations. 
+The learning rate controls the amount to change the individuals in each generation. It is multiplied to the mutation factor of the new individual so increasing its value can increase the amount of exploration done in each generation, but a too large learning rate can lead to the algorithm being unable to converge.
+The noise standard deviation controls the possible range for the mutation values used to evolve the population in each generation. Which, like the learning rate, controls the amount of exploration done by OpenAI-ES. The noise standard deviation is used in the stochastic function used to calculate the size of mutation for each individual.
+Population size and number of generations are used by the OpenAI-ES for defining how long it should continue exploring. A larger population size and generation count can increase the performance of the policy neural network outputted by the optimizer, but will take time taken to evolve will be longer.
+
