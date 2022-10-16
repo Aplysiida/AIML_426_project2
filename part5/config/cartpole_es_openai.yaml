@@ -18,5 +18,5 @@ optim:
   reward_norm: False
   sigma_init: 0.01 # noise standard deviation
   sigma_decay: 0.999
-  learning_rate: 0.001
+  learning_rate: 0.01
   learning_rate_decay: 0.9999

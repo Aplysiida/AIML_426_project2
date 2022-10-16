@@ -6,7 +6,7 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import torch
-#import pickle5 as pickle
+import pickle5 as pickle
 import yaml
 
 from assembly.base_assemble import BaseAssembleRL

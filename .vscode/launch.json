@@ -64,24 +64,44 @@
             "justMyCode": true
         },
         {
-            "name": "Python: ZOO-RL Question 5",
+            "name": "Python: ZOO-RL Question 5 Train",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/part5/",
             "program": "run_rl.py",
             "args": [
                 "--config","${workspaceFolder}/part5/config/cartpole_es_openai.yaml",
+                "--seed", "41",
                 "--log"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "Python: ZOO-RL Question 5aaa",
+            "name": "Python: ZOO-RL Question 5 Test",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/part5/",
             "program": "eval_rl.py",
+            "args": [
+                "--log"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: ZOO-RL Question 5 Chart",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/part5/",
+            "program": "chart_performance.py",
+            "args": [
+                "logs/CartPole-v1/seed_15",
+                "logs/CartPole-v1/seed_36",
+                "logs/CartPole-v1/seed_41",
+                "logs/CartPole-v1/seed_82",
+                "logs/CartPole-v1/seed_121"
+            ],
             "console": "integratedTerminal",
             "justMyCode": true
         }
