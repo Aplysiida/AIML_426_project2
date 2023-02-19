@@ -11,4 +11,5 @@ The libraries needed for Part 1 to 3 are:
     DEAP
     PyGraphviz
     Scikit
+    
 Part 2 uses arguments which are the filepaths to the knapsack data files. For part 4.1, flgp_q4.py takes the best FLGP functions generated from IDGP_main.py and converts the npy data into csv files which are written into the directory called 'data. Part 4.2 is done in classifier_q4.py where it reads and classifies the the csv data and outputs the performance and training time of each classifier. Part 5 uses run_rl.py to output training models and training performance to the 'logs' folder, eval_rl.py is also used to evaluate the test performance which is also outputted to the 'logs' folder. The output csv files is then read to chart_performance.py chart the performance of the policy neural networks. chart_performance.py arguments are the folder paths to the log files with a separate argument for each seed.
